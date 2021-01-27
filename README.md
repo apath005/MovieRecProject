@@ -27,17 +27,7 @@
  > * us to create a backend that allows us to access a family of classes without having to modify the structures of the classes themselves. This means that when we create our 
  > * algorithm for looking for movie recommendations, we will not have to edit the movie objects themselves in order to return a movie recommendation/s. We anticipate the need 
  > * to overload classes when looking for movie recommendation and we believe that composite and vistor combo will allow us to overcome that issue. The vistor pattern will
- > * specifically allow us to visit the composite children classes while allowing us to seperate the recommendaiton algorithm from the object clasess themselves. 
- > Your project description should summarize the project you are proposing. Be sure to include
- > * Why is it important or interesting to you?
- > * What languages/tools/technologies do you plan to use? (This list may change over the course of the project)
- >   * [toolname](link) - Short description
- > * What will be the input/output of your project?
- > * What are the two design patterns you will be using? For each design pattern you must explain in 4-5 sentences:
- >   * Why you picked this pattern and what feature you will implement with it
- >   * What problem you anticipate encountering when implementing your project that you will solve using the design pattern
- >   * Why the chosen design pattern will lead to a good solution to that problem
- > * This description should be in enough detail that the TA/instructor can determine the complexity of the project and if it is sufficient for the team members to complete in the time allotted. 
+ > * specifically allow us to visit the composite children classes while allowing us to seperate the recommendaiton algorithm from the object clasess themselves.  
 
  > ## Phase II
  > In addition to completing the "Class Diagram" section below, you will need to 
