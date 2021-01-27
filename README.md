@@ -18,16 +18,14 @@
 > * All project phases are to be submitted to this GitHub repository. You should modify this README file to reflect the different phases of the project. In addition, you should regularly hold sprint meetings with your group.
 
 ## Project Description
- > * Our group chose the Movie Recommender option as our choice of project. We believe the implementation and usage of multiple sorting and searching alogorithms 
- > * and creating an effective application in which an user can search movies is challenging and interesting. We plan on using C++ and
- > * [TheMovieDB](https://developers.themoviedb.org/3). 
- > * The UI will be a console GUI that will allow users to have an option of picking a movie based on parameters such as directors, genres, similar movies, movie eras, actors,
- > * and many more. The program will then output to the user a list of similar movies, or movies that much said parameters based upon the users input. 
- > * The design patterns we will be implementing will consist of Composite and Vistor pattern. The reason we picked these two patterns is because of their synergy allowing for 
- > * us to create a backend that allows us to access a family of classes without having to modify the structures of the classes themselves. This means that when we create our 
- > * algorithm for looking for movie recommendations, we will not have to edit the movie objects themselves in order to return a movie recommendation/s. We anticipate the need 
- > * to overload classes when looking for movie recommendation and we believe that composite and vistor combo will allow us to overcome that issue. The vistor pattern will
- > * specifically allow us to visit the composite children classes while allowing us to seperate the recommendaiton algorithm from the object clasess themselves.  
+ > Our group chose the Movie Recommender option as our choice of project. We believe the implementation and usage of multiple sorting and searching alogorithms 
+and creating an effective application in which an user can search movies is challenging and interesting. We plan on using C++ and
+[TheMovieDB](https://developers.themoviedb.org/3). The UI will be a console GUI that will allow users to have an option of picking a movie based on parameters such as directors, genres, similar movies, movie eras, actors, and many more. The program will then output to the user a list of similar movies, or movies that much said parameters based upon the users input. 
+ > The design patterns we will be implementing will consist of Composite and Vistor pattern. The reason we picked these two patterns is because of their synergy allowing for 
+us to create a backend that allows us to access a family of classes without having to modify the structures of the classes themselves. This means that when we create our 
+algorithm for looking for movie recommendations, we will not have to edit the movie objects themselves in order to return a movie recommendation/s. We anticipate the need 
+to overload classes when looking for movie recommendation and we believe that composite and vistor combo will allow us to overcome that issue. The vistor pattern will
+specifically allow us to visit the composite children classes while allowing us to seperate the recommendaiton algorithm from the object clasess themselves.  
 
  > ## Phase II
  > In addition to completing the "Class Diagram" section below, you will need to 
