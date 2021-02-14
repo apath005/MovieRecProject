@@ -18,7 +18,7 @@ The composite and visitor patterns can then be integrated to call on the base cl
 on each data set. The visitor pattern will be helpful in building a tree that searches and performs operations on each node in the background of the program to return a value specific to the user.
 
  > ## Phase II
- ![OMT Diagram](https://drive.google.com/file/d/1y5SMnuya250D7TdZKEJGqEtZVIuZ-hOU/view?usp=sharing)
+ ![OMT Diagram](https://github.com/cs100/final-project-jgarc594-apath005-aabdi005/blob/master/MR_Diagram.png)
  > In addition to completing the "Class Diagram" section below, you will need to 
  > * Set up your GitHub project board as a Kanban board for the project. It should have columns that map roughly to 
  >   * Backlog, TODO, In progress, In testing, Done
