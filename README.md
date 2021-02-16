@@ -18,7 +18,7 @@ The composite and visitor patterns can then be integrated to call on the base cl
 on each data set. The visitor pattern will be helpful in building a tree that searches and performs operations on each node in the background of the program to return a value specific to the user.
 
  > ## Phase II
-![MR_Diagram](https://user-images.githubusercontent.com/77028776/108130400-752f3280-7064-11eb-844a-f7aa86a74662.png)
+![MR_Diagram](https://user-images.githubusercontent.com/77028776/108130630-d0612500-7064-11eb-9ef4-4ce2cab93cce.png)
  > * The diagram above shows our class structure and how we plan on integrating the Vistor pattern and the Strategy pattern. We can see above that we will have the Movie Recommender Interface hold our final movie recommendation. This is a design choice so we have a family of classes that allow use different algorithms that will allow us to aggregate data that meets our required patterns. The vistor pattern will visit each of these classes and finalize a movie or movies that meet the required settings. The Vistor pattern will have an algorithm that will allow it to choose the best possible movie based on the parameters and will implement a final conclusive movie recommendation. We can see from the diagram above that we will have a visitor object visit each of the classes and aggregate a perfectMovieMatch from visiting inside those classes. 
  > * Create an "Epic" (note) for each feature and each design pattern and assign them to the appropriate team member. Place these in the `Backlog` column
  > * Complete your first *sprint planning* meeting to plan out the next 7 days of work.
