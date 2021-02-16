@@ -18,7 +18,7 @@ The composite and visitor patterns can then be integrated to call on the base cl
 on each data set. The visitor pattern will be helpful in building a tree that searches and performs operations on each node in the background of the program to return a value specific to the user.
 
  > ## Phase II
- ![OMT Diagram](https://github.com/cs100/final-project-jgarc594-apath005-aabdi005/blob/master/MR_Diagram.png)
+ ![MR_Diagram](https://user-images.githubusercontent.com/77028776/108020247-cf7eb380-6fd0-11eb-8a72-c3d112724050.png)
 
  > * Create an "Epic" (note) for each feature and each design pattern and assign them to the appropriate team member. Place these in the `Backlog` column
  > * Complete your first *sprint planning* meeting to plan out the next 7 days of work.
