@@ -14,7 +14,7 @@ specifically allow us to visit the strategy children classes while allowing us t
 a strategy pattern to identify certain parameters through classes which detect user input, such as generating classes by movie genres and movie eras which inherit from a base class.
 Our base class will have a class called 'Movie' which will be the interface for generating recommendations back to the user based on specific signifiers pertaining to movie genres,
 actors, directors, along with similar movies. The 'Movie' class will be beneficial for our interface since the base class will be static throughout the functionality of the program.
-The composite and visitor patterns can then be integrated to call on the base class to produce a value unique to the user and use separate data structures to perform new operations
+The strategy and visitor patterns can then be integrated to call on the base class to produce a value unique to the user and use separate data structures to perform new operations
 on each data set. The visitor pattern will be helpful in building a tree that searches and performs operations on each node in the background of the program to return a value specific to the user.
 
  > ## Phase II
