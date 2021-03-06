@@ -10,7 +10,12 @@ public:
      setMovie(std::string movieName){
          this->movieTitle = movieName;
      }
-     std::string getMovie() override {
+
+    virtual bool isComposite(){
+         return false;
+     }
+
+    std::string getMovie() override {
         return movieTitle;
     }
 

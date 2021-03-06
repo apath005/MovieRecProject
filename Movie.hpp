@@ -30,5 +30,6 @@ public:
 
     virtual std::string getMovie() = 0;
 
+    virtual bool isComposite() = 0;
 };
 #endif

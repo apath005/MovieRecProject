@@ -36,14 +36,19 @@ public:
         }
     }
 
+    virtual bool isComposite() {
+        return true;
+    }
+
     virtual std::string getMovie() {
         std::string movies;
 
         for (Movie* m : children) {
+
             movies += m->getMovie() + "\n";
         }
 
-        return "Movies:\n" + movies;
+        return movies;
     }
 
 
