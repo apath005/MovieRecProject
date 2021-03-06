@@ -5,12 +5,12 @@
 #ifndef MOVIERECOMMENDER_HPP
 #define MOVIERECOMMENDER_HPP
 
-
+#include "Movie.hpp"
 class MovieRecommender {
 
 
 public:
-    virtual ~Select() = default;
+    virtual ~MovieRecommender() = default;
 
 
     // TODO: Requires a parameter! Store movie from Movie

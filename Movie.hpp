@@ -6,25 +6,29 @@
 
 
 
-// TODO: This class will store our genres and subgenres in the subclass Genre and selectGenre will pick from there
 class Movie {
 
+protected:
+    Movie* parent;
 public:
-    Movie() {
 
+
+    void setParent(Movie *parent_) {
+        this->parent = parent_;
     }
 
-
+    Movie* getParent() const {
+        return this->parent;
+    }
     virtual ~Movie() {}
 
-    virtual void addMovie(Movie mov) = 0;
+    virtual void addMovie(Movie *mov){}
 
-    virtual void remove(Movie mov) = 0;
+    virtual void remove(std::string Movie){}
 
-    virtual void getChild() = 0;
+    virtual Movie* getChild(std::string movieName) {}
 
-    virtual void setMovie() = 0;
-
+    virtual std::string getMovie() = 0;
 
 };
 #endif
