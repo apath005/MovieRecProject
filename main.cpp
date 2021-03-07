@@ -29,6 +29,7 @@ int main() {
 
     auto* sheet = new Spreadsheet;
     auto* inter = new Interface(sheet);
+
     inter->scrapeCSVFiles();
     sheet->print_selection(std::cout);
 
