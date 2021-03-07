@@ -10,8 +10,19 @@ public:
      setMovie(std::string movieName){
          this->movieTitle = movieName;
      }
+    void addMovie(Movie *mov) override {
 
-    virtual bool isComposite(){
+     };
+
+    void remove(std::string Movie) override {
+
+    };
+
+    Movie* getChild(std::string movieName) override {
+        return nullptr;
+    };
+
+    bool isComposite() override{
          return false;
      }
 

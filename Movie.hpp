@@ -26,7 +26,7 @@ public:
 
     virtual void remove(std::string Movie){}
 
-    virtual Movie* getChild(std::string movieName) {}
+    virtual Movie* getChild(std::string movieName) = 0 ;
 
     virtual std::string getMovie() = 0;
 

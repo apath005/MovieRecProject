@@ -6,15 +6,15 @@
 #define MOVIERECOMMENDER_HPP
 
 #include "Movie.hpp"
-class MovieRecommender {
+class MovieSelector {
 
 
 public:
-    virtual ~MovieRecommender() = default;
+    virtual ~MovieSelector() = default;
 
 
     // TODO: Requires a parameter! Store movie from Movie
-    virtual bool select(const Movie) const = 0;
+    virtual bool select(const Movie* m) const = 0;
 
 
     virtual bool select() const = 0;

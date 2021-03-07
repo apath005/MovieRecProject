@@ -1,13 +1,15 @@
 #include <iostream>
 
 #include "Movie.hpp"
-#include "MovieRecommender.hpp"
+#include "MovieSelector.hpp"
 #include "MovieGenres.hpp"
 #include "setMovie.hpp"
+#include "interface.hpp"
 int main() {
     /*
      *Test function requires more testing and needs to be moved to its own class
      */
+
     Movie* comedy = new MovieGenres("Comedy");
     Movie* romance = new MovieGenres("Romance");
 
@@ -23,6 +25,12 @@ int main() {
     romance->addMovie(comedy);
 
     std::cout << romance->getMovie();
+
+
+    auto* sheet = new Spreadsheet;
+    auto* inter = new Interface(sheet);
+    inter->scrapeCSVFiles();
+    sheet->print_selection(std::cout);
 
     return 0;
 }

@@ -1,6 +1,7 @@
-
 #ifndef MOVIEGENRES_HPP
 #define MOVIEGENRES_HPP
+
+#include <utility>
 #include <vector>
 #include "Movie.hpp"
 class MovieGenres : public Movie {
@@ -9,7 +10,7 @@ public:
     std::string genreName;
 
     MovieGenres(std::string genre) {
-        this->genreName = genre;
+        this->genreName = std::move(genre);
     }
 
     void addMovie(Movie* movie) override {
