@@ -18,6 +18,7 @@ public:
 
     virtual bool select(const Spreadsheet* sheet, int row) const = 0;
 
+    virtual bool select(const std::string& s) const = 0;
 };
 
 #endif //MOVIERECOMMENDER_H

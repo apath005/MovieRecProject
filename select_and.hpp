@@ -7,35 +7,20 @@
 
 class Select_And : public MovieSelector {
 protected:
-	MovieSelector* selectActor;
-	MovieSelector* selectDirector;
-	MovieSelector* selectYear;
+    MovieSelector* select1;
+    MovieSelector* select2;
 public:
-	Select_And(MovieSelector* actor, MovieSelector* director, MovieSelector* year) {
-	this->selectActor = actor;
-	this->selectDirector = director;
-	this->selectYear = year;
-	}
+    Select_And(MovieSelector* select, MovieSelector* select_)
+    {
+        select1 = select;
+        select2 = select_;
+    }
+    virtual bool select(const Spreadsheet* sheet, int row) const {
+        return false;
+    }
 
-	~Select_And() { 
-	delete selectActor; 
-	delete selectDirector;
-	delete selectYear;
-	}
-
-	virtual bool select(const Movie* movie) const {
-        if (selectActor->select(sheet, row) == true && selectDirector->select(sheet, row) == true) {
-            return true;
-        }
-	if (selectActor->select(sheet, row) == true && selectYear->select(sheet, row) == true) {
-            return true;
-        }
-	if (selectDirector->select(sheet, row) == true && selectYear->select(sheet, row) == true) {
-            return true;
-        }
-        else {
-            return false;
-        }
+    virtual bool select(const std::string& s) const {
+        return select2->select(s) && select1->select(s);
     }
 };
 

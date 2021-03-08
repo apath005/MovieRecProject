@@ -5,10 +5,10 @@
 #include <vector>
 #include "Movie.hpp"
 class MovieGenres : public Movie {
-    std::vector<Movie*> children;
+
 public:
     std::string genreName;
-
+    std::vector<Movie*> children;
     MovieGenres(std::string genre) {
         this->genreName = std::move(genre);
     }
@@ -45,10 +45,12 @@ public:
         }
         return nullptr;
     }
-
+    std::string getMovieName() override{
+        return "";
+    }
     void remove(std::string movieName) override {
         for (int i = 0; i<children.size(); i++){
-            if (children.at(i)->getMovie() == movieName) {
+            if (!children.at(i)->isComposite() && children.at(i)->getMovieName() == movieName) {
                 children.at(i)->setParent(nullptr);
                 delete children.at(i);
                 children.erase(children.begin() + i);
@@ -57,14 +59,49 @@ public:
         }
     }
 
+    void removeAllChildren() override {
+        for (int i = 0; i < children.size(); i++) {
+            children.at(i)->setParent(nullptr);
+            delete children.at(i);
+            children.erase(children.begin() + i);
+        }
+    }
+
+    void removeSubGenre(std::string genreName) override {
+        for (int i = 0; i<children.size(); i++){
+            if (children.at(i)->isComposite() && children.at(i)->getGenreName() == genreName ) {
+                children.at(i)->removeAllChildren();
+                children.at(i)->setParent(nullptr);
+                delete children.at(i);
+                children.erase(children.begin() + i);
+            }
+        }
+
+    }
+
     virtual bool isComposite() {
         return true;
+    }
+
+    virtual std::string printSubGenres() {
+        std::string result;
+
+        for(Movie* m : children){
+            if (m->isComposite()){
+                result+= "\n" + m->getGenreName();
+
+            }
+        }
+        return result;
     }
 
     virtual std::string getMovie() {
         std::string movies;
 
         for (Movie* m : children) {
+            if(m->subGenreExists()){
+                movies+="Main Genre: \n";
+            }
             if(m->isComposite()){
                 movies+= "Sub Genre: " + m->getGenreName() + "\n";
             }
@@ -73,8 +110,15 @@ public:
 
         return movies;
     }
-
-
+    virtual Movie* getChildB() {
+        for(Movie* m : children){
+            return m;
+        }
+        return nullptr;
+    }
+    virtual std::string getDirector() {
+        return "0";
+    }
 
 
 
