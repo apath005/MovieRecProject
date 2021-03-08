@@ -20,6 +20,22 @@ public:
         movie->setParent(this);
     }
 
+    Movie* subGenre(std::string genreName) override {
+        for(Movie*m : children) {
+            if(m->isComposite() && m->getGenreName().find(genreName) != std::string::npos){
+                return m;
+            }
+        }
+        return nullptr;
+    }
+    bool subGenreExists() override {
+        //if there is a subGenre return true
+
+        for(Movie* m: children){
+            if (m->isComposite()) return true;
+        }
+        return false;
+    }
     Movie* getChild(std::string movieName) override {
         for (Movie* m : children){
             if (m->getMovie() == movieName) {
@@ -33,6 +49,7 @@ public:
         for (int i = 0; i<children.size(); i++){
             if (children.at(i)->getMovie() == movieName) {
                 children.at(i)->setParent(nullptr);
+                delete children.at(i);
                 children.erase(children.begin() + i);
 
             }

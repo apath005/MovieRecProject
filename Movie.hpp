@@ -33,5 +33,7 @@ public:
     virtual bool isComposite() = 0;
 
     virtual std::string getGenreName() = 0;
+    virtual Movie* subGenre(std::string genreName) = 0;
+    virtual bool subGenreExists() = 0;
 };
 #endif

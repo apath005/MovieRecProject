@@ -32,10 +32,10 @@ public:
         std::string result =
                 "Movie Title: " + movieInfo.at(0)
                 + "\nYear: " + movieInfo.at(1)
-                + "\nGenre" + movieInfo.at(2)
-                + "\nDirector" + movieInfo.at(3)
-                + "\nActors" + movieInfo.at(4)
-                + "\nMetascore" + movieInfo.at(5) + "\n";
+                + "\nGenre: " + movieInfo.at(2)
+                + "\nDirector: " + movieInfo.at(3)
+                + "\nActors: " + movieInfo.at(4)
+                + "\nMetascore: " + movieInfo.at(5) + "\n";
         return result;
     }
 
@@ -43,6 +43,15 @@ public:
     std::string getGenreName() override {
         return "0";
     }
+
+     bool subGenreExists() override {
+        return false;
+    }
+
+    Movie* subGenre(std::string genreName) override {
+        return nullptr;
+    };
+
 
 };
 #endif //SETMOVIE_HPP

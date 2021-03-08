@@ -12,6 +12,7 @@
 #include <iomanip>
 #include <fstream>
 #include "select_genre.hpp"
+#include <algorithm>
 class Interface {
     std::vector <Movie*> genres;
     Spreadsheet* sheet = new Spreadsheet;
@@ -27,9 +28,15 @@ public:
      * This will be the main function to accept user input and from there it return print the appropriate movie recommendation
      */
     void userInterface() {
+        createGenre("Romance");
+        addMovie("Red", "1990", "Romance", "Ayden", "Mohammed, Abdi", "35.5");
+        createGenre("Romance, Horror");
+        addMovie("Blue", "2015", "Romance, Horror", "Sam", "Abdi, Jogar", "95.5");
+        std::cout << genres.at(1)->getMovie();
+
         //Create a category
         //Create a sub category
-        //Create a movie and add it a category
+        //Create a movie and add it to a category
         //Remove a category
         //Remove a sub category
         //Remove a movie from a category
@@ -39,7 +46,8 @@ public:
             //Genre
             //Year
             //AND
-            
+
+
     }
 
     //TODO: This function is called when user wants to add a movie
@@ -47,6 +55,7 @@ public:
     void addMovie(std::string Title, std::string Year, std::string Genre, std::string Director, std::string Actors, std::string Metascore) {
         //Edit this and require them to CIN
         Movie* tmp = new setMovie({Title, Year, Genre, Director, Actors, Metascore});
+        sheet->add_row({Title, Year, Genre, Director, Actors, Metascore});
         getGenre(Genre)->addMovie(tmp);
     }
     //TODO: This function removes a movie
@@ -75,49 +84,101 @@ public:
         return false;
     }
     //Genre exists function:
-
     bool genreExists(std::string genre){
-        if(!genres.empty()){
+        if(genres.empty()){
             return false;
         }
-        for(Movie* m : genres){
-            if (m->getGenreName().find(genre) != std::string::npos) {
-                return true;
+
+
+        std::string delimiter = ",";
+        if(genre.find(delimiter) != std::string::npos) {
+            std::stringstream test(genre);
+            std::string token;
+            std::vector<std::string> tokens;
+
+            while (std::getline(test, token, ',')){
+                tokens.push_back(token);
             }
-        }
+            if (genreExists(tokens.at(0))){
+                getGenre(tokens.at(0));
+
+            }
+            /*
+            size_t pos = 0;
+            std::string token;
+            Movie *currentGenre = nullptr;
+            std::string::iterator end_pos = std::remove(token.begin(), token.end(), ' ');
+            token.erase(end_pos, token.end());
+            token = genre.substr(0, pos);
+            if (genreExists(token)) {
+                currentGenre = getGenre(token);
+                token.erase(end_pos, token.end());
+                token = genre.substr(0, pos);
+                return currentGenre->subGenre(token) != nullptr;
+            }
+            */
+        }else{
+                for(Movie* m : genres){
+                    if(m->getGenreName().find(genre) != std::string::npos){
+                        return true;
+                    }
+                }
+            }
         return false;
-
     }
-
-    Movie* getGenre(std::string genreName) {
-        if(!genreExists(genreName)){
-            std::cout << "\nThat genre doesn't exist. Creating it now";
-            Movie* mov = new MovieGenres(genreName);
-            genres.push_back(mov);
-            return mov;
+    Movie* getGenre(const std::string genre) {
+        if(!genreExists(genre)){
+            std::cout << "\nThat genre doesn't exist. Creating it now.";
+            createGenre(genre);
+            return getGenre(genre);
         }
-
-        for(Movie* m : genres) {
-            if (m->getGenreName().find(genreName) != std::string::npos) {
-                return m;
+        std::string delimiter = ",";
+        if(genre.find(delimiter) != std::string::npos) {
+            size_t pos = 0;
+            std::string token;
+            Movie *currentGenre = nullptr;
+            std::string::iterator end_pos = std::remove(token.begin(), token.end(), ' ');
+            token.erase(end_pos, token.end());
+            token = genre.substr(0, pos);
+            //get subGenre for this token
+            currentGenre = getGenre(token);
+            token.erase(end_pos, token.end());
+            token = genre.substr(0, pos);
+            return currentGenre->subGenre(token);
+        } else {
+            for(Movie* m : genres) {
+                if (m->getGenreName().find(genre) != std::string::npos) {
+                    return m;
+                }
             }
         }
         return nullptr;
     }
+    //TODO: This function is called when the user wants to add a genre
+    void createGenre(std::string genre) {
+            std::string delimiter = ",";
+            if(genre.find(delimiter) != std::string::npos) {
+                size_t pos = 0;
+                std::string token;
+                Movie *currentGenre = nullptr;
+                std::string::iterator end_pos = std::remove(token.begin(), token.end(), ' ');
+                token.erase(end_pos, token.end());
+                token = genre.substr(0, pos);
+                //get subGenre for this token
+                currentGenre = getGenre(token);
+                token.erase(end_pos, token.end());
+                token = genre.substr(0, pos);
+                currentGenre->addMovie(new MovieGenres(token));
+            } else {
+                    Movie* mov = new MovieGenres(genre);
+                    genres.push_back(mov);
+                }
+        }
 
     void printMovies(){
 
     }
-    //TODO: This function is called when the user wants to add a genre
-    void addToGenres(std::string genre) {
-        if(genreExists(genre)){
-            std::cout << "This genre already exists";
-        }
-        else{
-            //It adds it correctly
-            Movie* gre = new MovieGenres(genre);
-        }
-    }
+
 
     /*
      * This will scrape and store our information into the spreadsheet class for easier querying via vectors

@@ -20,7 +20,7 @@ public:
         return select(dataset->cell_data(row, column));
     }
 
-    // Derived classes implement this interface to select from movie datasets
+    // Derived classes implement this interface to select from movie dataset
     virtual bool select(const std::string& s) const = 0;
     };
 
