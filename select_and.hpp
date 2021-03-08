@@ -1,17 +1,17 @@
 #ifndef __SELECT_AND_HPP__
 #define __SELECT_AND_HPP__
 
-#include "MovieRecommender.hpp"
+#include "MovieSelector.hpp"
 
 #include "spreadsheet.hpp"
 
-class Select_And : public MovieRecommender {
+class Select_And : public MovieSelector {
 protected:
-	MovieRecommender* selectActor;
-	MovieRecommender* selectDirector;
-	MovieRecommender* selectYear;
+	MovieSelector* selectActor;
+	MovieSelector* selectDirector;
+	MovieSelector* selectYear;
 public:
-	Select_And(MovieRecommender* actor, MovieRecommender* director, MovieRecommender* year) {
+	Select_And(MovieSelector* actor, MovieSelector* director, MovieSelector* year) {
 	this->selectActor = actor;
 	this->selectDirector = director;
 	this->selectYear = year;
