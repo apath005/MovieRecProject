@@ -9,6 +9,14 @@ class MovieGenres : public Movie {
 public:
     std::string genreName;
     std::vector<Movie*> children;
+
+    ~MovieGenres() {
+        for(Movie* m: children){
+            if(m->isComposite()) m->removeAllChildren();
+            m->removeAllChildren();
+            delete m;
+        }
+    }
     MovieGenres(std::string genre) {
         this->genreName = std::move(genre);
     }

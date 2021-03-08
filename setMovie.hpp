@@ -9,6 +9,9 @@ class setMovie : public Movie {
 
     std::vector<std::string> movieInfo;
 public:
+    ~setMovie() {
+
+    }
      setMovie(std::vector<std::string> movieInfo){
          this->movieInfo = std::move(movieInfo);
      }

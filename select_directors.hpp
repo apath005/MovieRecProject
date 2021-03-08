@@ -27,6 +27,9 @@ public:
     virtual bool select(const std::string& s) const {
 
     }
+    ~Select_Directors() {
+        delete this;
+    }
 
 
 };

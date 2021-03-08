@@ -26,6 +26,9 @@ public:
         return true;
 
     }
+    ~Select_Actors() {
+        delete this;
+    }
 };
 
 #endif //SELECT_ACTORS_H__

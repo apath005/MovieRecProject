@@ -23,6 +23,9 @@ public:
     virtual bool select(const std::string& s) const {
         return select2->select(s) && select1->select(s);
     }
+    ~Select_And() {
+        delete this;
+    }
 };
 
 #endif

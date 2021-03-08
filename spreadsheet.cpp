@@ -51,8 +51,15 @@ void Spreadsheet::remove_row(std::string title){
 }
 void Spreadsheet::print_selection(std::ostream &out) const {
     for (int i = 0; i < data.size(); i++) {
-        out << this->cell_data(i, 0) << " " << this->cell_data(i, 1)
-            << " " << this->cell_data(i, 2) << " " << this->cell_data(i, 3) << "\n";
+        if (select->select(this, i)) {
+            out << "\nMovie Title: " + this->cell_data(i, 0)
+                << "\nYear: " << this->cell_data(i, 1)
+                << "\nGenre: " << this->cell_data(i, 2)
+                << "\nDirectors: " << this->cell_data(i, 3)
+                << "\nActors: " << this->cell_data(i, 4)
+                << "\nMetascore: " << this->cell_data(i, 5)
+                << "\n";
+        }
     }
 }
 

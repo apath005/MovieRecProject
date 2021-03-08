@@ -21,6 +21,9 @@ public:
     virtual bool select(const Spreadsheet* sheet, int row) const {
 
     }
+    ~Select_Genre() {
+        delete this;
+    }
 };
 
 

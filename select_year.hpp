@@ -23,6 +23,9 @@ public:
     virtual bool select(const std::string& s) const {
         return false;
     }
+    ~Select_Year() {
+        delete this;
+    }
 };
 
 #endif // SELECT_YEAR_H
