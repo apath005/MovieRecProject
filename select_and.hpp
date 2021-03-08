@@ -1,4 +1,3 @@
-
 #ifndef __SELECT_AND_HPP__
 #define __SELECT_AND_HPP__
 
