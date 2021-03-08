@@ -13,5 +13,8 @@ int main() {
     auto* Interface_ = new Interface(sheet);
 
     Interface_->userInterface();
+    delete Interface_;
+    sheet->clear();
+    delete sheet;
     return 0;
 };

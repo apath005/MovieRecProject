@@ -23,6 +23,9 @@ public:
     // Derived classes implement this interface to select from movie dataset
     virtual bool select(const std::string& s) const = 0;
 
+    ~Select_Column() {
+        delete this;
+    }
 };
 
 #endif

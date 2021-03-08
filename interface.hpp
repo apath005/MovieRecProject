@@ -27,7 +27,14 @@ public:
         this->sheet = sheet;
         sheet->set_column_names({"Title", "Year", "Genre", "Director", "Actors", "Metascore"});
     }
-    ~Interface() {}
+    ~Interface() {
+        for(Movie*m : genres) {
+            m->removeAllChildren();
+            delete m;
+        }
+        sheet->clear();
+
+    }
 
     //TODO: Accepts User input and then gets movie recommendations
     /*
@@ -146,6 +153,7 @@ public:
                 }
             }
         }
+        delete gen;
     }
 
     void printCategories(std::string genre) {
