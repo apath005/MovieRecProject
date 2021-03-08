@@ -32,7 +32,7 @@ public:
         addMovie("Red", "1990", "Romance", "Ayden", "Mohammed, Abdi", "35.5");
         createGenre("Romance, Horror");
         addMovie("Blue", "2015", "Romance, Horror", "Sam", "Abdi, Jogar", "95.5");
-        std::cout << genres.at(1)->getMovie();
+        std::cout << genres.at(0)->getMovie();
 
         //Create a category
         //Create a sub category
@@ -100,8 +100,7 @@ public:
                 tokens.push_back(token);
             }
             if (genreExists(tokens.at(0))){
-                getGenre(tokens.at(0));
-
+                return getGenre(tokens.at(0)) != nullptr;
             }
             /*
             size_t pos = 0;
@@ -134,6 +133,19 @@ public:
         }
         std::string delimiter = ",";
         if(genre.find(delimiter) != std::string::npos) {
+            std::stringstream test(genre);
+            std::string token;
+            std::vector<std::string> tokens;
+
+            while (std::getline(test, token, ',')){
+                tokens.push_back(token);
+            }
+            if (genreExists(tokens.at(0))){
+                 return getGenre(tokens.at(0))->subGenre(tokens.at(1));
+
+            }
+
+            /*
             size_t pos = 0;
             std::string token;
             Movie *currentGenre = nullptr;
@@ -145,6 +157,7 @@ public:
             token.erase(end_pos, token.end());
             token = genre.substr(0, pos);
             return currentGenre->subGenre(token);
+             */
         } else {
             for(Movie* m : genres) {
                 if (m->getGenreName().find(genre) != std::string::npos) {
@@ -158,6 +171,23 @@ public:
     void createGenre(std::string genre) {
             std::string delimiter = ",";
             if(genre.find(delimiter) != std::string::npos) {
+                std::stringstream test(genre);
+                std::string token;
+                std::vector<std::string> tokens;
+                while (std::getline(test, token, ',')){
+                    tokens.push_back(token);
+                }
+                if (!genreExists(tokens.at(0))){
+                    Movie* mov = new MovieGenres(tokens.at(0));
+                    genres.push_back(mov);
+                    Movie* mov_ = new MovieGenres(tokens.at(1));
+                    mov->addMovie(mov);
+                }
+                else {
+                    Movie* mov_ = new MovieGenres(tokens.at(1));
+                    getGenre(tokens.at(0))->addMovie(mov_);
+                }
+                /*
                 size_t pos = 0;
                 std::string token;
                 Movie *currentGenre = nullptr;
@@ -169,6 +199,7 @@ public:
                 token.erase(end_pos, token.end());
                 token = genre.substr(0, pos);
                 currentGenre->addMovie(new MovieGenres(token));
+                 */
             } else {
                     Movie* mov = new MovieGenres(genre);
                     genres.push_back(mov);

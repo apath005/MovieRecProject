@@ -36,6 +36,7 @@ public:
         }
         return false;
     }
+
     Movie* getChild(std::string movieName) override {
         for (Movie* m : children){
             if (m->getMovie() == movieName) {
@@ -64,8 +65,10 @@ public:
         std::string movies;
 
         for (Movie* m : children) {
-
-            movies += m->getMovie() + "\n";
+            if(m->isComposite()){
+                movies+= "Sub Genre: " + m->getGenreName() + "\n";
+            }
+                movies += m->getMovie() + "\n";
         }
 
         return movies;
