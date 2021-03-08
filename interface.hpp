@@ -40,6 +40,39 @@ public:
             //Year
             //AND
             
+	std::string userOp;
+    	std::cout << "Would you like a Recommendation based on: " << std::endl;
+    	std::cout << "1: Director" << std::endl;
+    	std::cout << "2: Actor" << std::endl;
+    	std::cout << "3: Genre" << std::endl;
+    	std::cout << "4: Year" << std::endl;
+    	std::cout << "5: AND\n" << std::endl;
+    	std::cout << "Selection: ";
+    	std::cin >> userOp;
+    	std::cout << std::endl;
+
+    
+    	int i = 0;
+    	while(userOp[i]) {userOp[i] = tolower(userOp[i]); i++;}
+
+    	if(userOp == "1" || userOp == "director") {
+        	return;
+    	}
+    	else if(userOp == "2" || userOp == "actor") {
+        	return;
+    	}
+    	else if(userOp == "3" || userOp == "genre") {
+        	return;
+    	}
+    	else if(userOp == "4" || userOp == "year") {
+        	return;
+    	}
+    	else if(userOp == "5" || userOp == "and") {
+        	return;
+    	}
+    	else {
+        	std::cout << "invalid input" << std::endl;
+    	}
     }
 
     //TODO: This function is called when user wants to add a movie
