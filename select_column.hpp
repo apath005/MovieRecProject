@@ -9,9 +9,10 @@ class Select_Column: public MovieSelector
 protected:
     int column;
 public:
-    Select_Column(const Spreadsheet* dataset, const std::string& movieName)
+    Select_Column(const Spreadsheet* dataset, const std::string& movieColumn)
     {
-        column = dataset->get_column_by_name(movieName);
+        column = dataset->get_column_by_name(movieColumn);
+        int r = column;
     }
 
     virtual bool select(const Spreadsheet* dataset, int row) const

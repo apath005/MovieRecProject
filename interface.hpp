@@ -15,6 +15,9 @@
 #include <algorithm>
 #include "select_genre.hpp"
 #include "select_directors.hpp"
+#include "select_year.hpp"
+#include "select_actors.hpp"
+#include "select_and.hpp"
 class Interface {
     std::vector <Movie*> genres;
     Spreadsheet* sheet = new Spreadsheet;
@@ -22,7 +25,7 @@ class Interface {
 public:
     Interface(Spreadsheet* sheet) {
         this->sheet = sheet;
-        sheet->set_column_names({"Title", "year", "genre", "director", "actors", "metascore"});
+        sheet->set_column_names({"Title", "Year", "Genre", "Director", "Actors", "Metascore"});
     }
     ~Interface() {}
 
@@ -71,25 +74,35 @@ public:
         //Remove movies based on categories:
         std::cout << "--Adding Faux Movies--" << std::endl;
         addMovie("Movie1", "2019", "Romance", "Abdi", "Jogar, Goat", "39.5");
-        addMovie("Movie2", "2018", "Comedy,Fiction", "Abdi", "Jogar, Goat", "39.5");
+        addMovie("Movie2", "2018", "Comedy,Fiction", "Abdi", "Goat", "39.5");
         addMovie("Movie3", "2019", "Romance", "Abdi", "Jogar, Goat", "39.5");
-        addMovie("Movie4", "2018", "Comedy,Fiction", "Jogar", "Jogar, Goat", "39.5");
-        addMovie("Movie5", "2018", "Comedy,Sci-Fi", "Jogar", "Jogar, Goat", "39.5");
-        addMovie("Movie6", "2018", "Comedy,Sci-Fi", "Jogar", "Jogar, Goat", "39.5");
+        addMovie("Movie4", "2017", "Comedy,Fiction", "Jogar", "Jogar", "39.5");
+        addMovie("Movie5", "2016", "Comedy,Sci-Fi", "Jogar", "Jogar", "39.5");
+        addMovie("Movie6", "2015", "Comedy,Sci-Fi", "Jogar", "Jogar", "39.5");
         printAllMovies("Comedy,Sci-Fi");
         std::cout << "--Deleting Category Movies--" << std::endl;
         removeGenre("Comedy,Sci-Fi");
         printAllMovies("Comedy,Sci-Fi");
         //Return a recommendations based on either
             //Director
-            std::cout << "--Checking Recommendation Function--";
-            sheet->set_selection(new Select_Directors(sheet, "Abdi", "director"));
+            std::cout << "--Checking Recommendation Function--\n";
+            sheet->set_selection(new Select_Directors(sheet, "Abdi", "Director"));
             sheet->print_selection(std::cout);
             //Actor
+            std::cout << "--Checking Recommendation Function for Actors--\n";
+            sheet->set_selection(new Select_Actors(sheet, "Goat", "Actors"));
+            sheet->print_selection(std::cout);
             //Genre
+            std::cout << "--Checking Recommendation Function For Genre--\n";
+            printSimilarGenres();
             //Year
+            std::cout << "--Checking Recommendation Function for Year--\n";
+            sheet->set_selection(new Select_Year(sheet, "2018", "Year"));
+            sheet->print_selection(std::cout);
             //AND
-
+            std::cout << "--Checking Recommendation Function for AND--\n";
+            sheet->set_selection(new Select_And(new Select_Year(sheet, "2018", "Year"), new Select_Actors(sheet, "Goat", "Actors")));
+            sheet->print_selection(std::cout);
 
     }
 
@@ -109,21 +122,33 @@ public:
             }
         }
     }
-    /*
-    void printAllMovies(MovieSelector* select){
-        for (Movie *m : genres) {
-            if(m->isComposite() && m->subGenreExists()){
-                //loop through its subgenres
-                    select->select(m->getChildB()->getDirector());
 
+    void printSimilarGenres() {
+        std::string genre = "Comedy,Fiction";
+        MovieSelector* gen = new Select_Genre(genre);
+
+        std::string delimiter = ",";
+        if (genre.find(delimiter) != std::string::npos) {
+            std::stringstream test(genre);
+            std::string token;
+            std::vector<std::string> tokens;
+            while (std::getline(test, token, ',')) {
+                tokens.push_back(token);
             }
-            else{
-                select->select(m->getChildB()->getDirector());
+            std::cout << "\nSimilar movies in this genre include: " << std::endl;
+            std::cout << getSubGenre(getGenre(tokens.at(0)), tokens.at(1))->getMovie();
+
+        } else {
+            for (Movie *m: genres) {
+                if(gen->select(m->getGenreName())){
+                    std::cout << "\nSimilar movies in this genre include: " << std::endl;
+                    std::cout << m->getMovie();
+                }
             }
         }
     }
-     */
-    void printCategories(std::string genre){
+
+    void printCategories(std::string genre) {
         std::string delimiter = ",";
         if(genre.find(delimiter) != std::string::npos) {
             std::cout << "This a subcategory named: " + getGenre(genre)->getGenreName();
