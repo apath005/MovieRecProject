@@ -1,25 +1,27 @@
 #ifndef __SELECT_COLUMN_HPP__
 #define __SELECT_COLUMN_HPP__
 
-#include "MovieRecommender.hpp"
+#include "MovieSelector.hpp"
+#include "spreadsheet.hpp"
 
-
-class Select_Column: public MovieRecommender
+class Select_Column: public MovieSelector
 {
 protected:
     int column;
-    int row;
 public:
-    Select_Column(const Movie* dataset, const std::string& movieName)
+    Select_Column(const Spreadsheet* dataset, const std::string& movieName)
     {
-        column = dataset->get_column_by_movieName(movieName);
+        column = dataset->get_column_by_name(movieName);
     }
 
-    virtual bool select(const Movie* dataset) const
+    virtual bool select(const Spreadsheet* dataset, int row) const
     {
-        return select(dataset->movie_data(row, column));
+        return select(dataset->cell_data(row, column));
     }
 
-    // Derived classes implement this interface to select from movie datasets
+    // Derived classes implement this interface to select from movie dataset
     virtual bool select(const std::string& s) const = 0;
-    };
+
+};
+
+#endif

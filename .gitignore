@@ -1,0 +1,6 @@
+.idea/
+/cmake_install.cmake
+/CMakeFiles/
+/lib/
+/CaMÎ
+PublicMovieDatasets/IMDb movies.csv

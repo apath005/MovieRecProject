@@ -2,30 +2,33 @@
 
 #define __SELECT_DIRECTORS_HPP__
 
+#include <utility>
+
 #include "select_column.hpp"
 
 
 
 class Select_Directors: public Select_Column
 {
-public:
     std::string directorName;
-    Select_Directors(const Movie* movie, const std::string& movieName, const std::string directorName)
+    Spreadsheet* sheet;
+public:
+
+    Select_Directors(Spreadsheet* sheet, std::string directorName, const std::string& columnName) : Select_Column(sheet, columnName)
     {
-        this->movieName = movieName;
-        this->directorName = directorName;
+        this->directorName = std::move(directorName);
+        this->sheet = sheet;
     }
 
-    virtual bool select(const Movie* movie) const
-    {
-        return movie->movie_data(row, column).find(directorName) != std::string::npos;
-    {
+    virtual bool select(const Spreadsheet* sheet, int row) const {
+        return sheet->cell_data(row, column).find(directorName)!= std::string::npos;
+    }
 
-    virtual bool select(const std::string& s) const
-    {
-        return movieName;
+    virtual bool select(const std::string& s) const {
 
     }
-}
+
+
+};
 
 #endif// __SELECT_DIRECTORS_H__
