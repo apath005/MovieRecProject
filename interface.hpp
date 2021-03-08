@@ -13,9 +13,12 @@
 #include <fstream>
 #include "select_genre.hpp"
 #include <algorithm>
+#include "select_genre.hpp"
+#include "select_directors.hpp"
 class Interface {
     std::vector <Movie*> genres;
     Spreadsheet* sheet = new Spreadsheet;
+
 public:
     Interface(Spreadsheet* sheet) {
         this->sheet = sheet;
@@ -28,20 +31,60 @@ public:
      * This will be the main function to accept user input and from there it return print the appropriate movie recommendation
      */
     void userInterface() {
-        createGenre("Romance");
-        addMovie("Red", "1990", "Romance", "Ayden", "Mohammed, Abdi", "35.5");
-        createGenre("Romance, Horror");
-        addMovie("Blue", "2015", "Romance, Horror", "Sam", "Abdi, Jogar", "95.5");
-        std::cout << genres.at(0)->getMovie();
 
-        //Create a category
+        //Create a category works
+        createGenre("Romance");
+        createGenre("Comedy");
+        createGenre("Fiction");
+        createGenre("Sci-Fi");
+        printAllCategories();
+        //Delete a category
+        std::cout << "--Removing categories--" << std::endl;
+        removeGenre("Fiction");
+        removeGenre("Sci-Fi");
+        printAllCategories();
         //Create a sub category
-        //Create a movie and add it to a category
-        //Remove a category
+        std::cout << "--Creating subCategories--" << std::endl;
+        createGenre("Romance,Sci-Fi");
+        createGenre("Comedy,Fiction");
+        printAllCategories();
+        std::cout << "--Non existent categories--" << std::endl;
+        createGenre("Sci-Fi, Cordial");
+        printAllCategories();
         //Remove a sub category
+        std::cout << "--Removing sub categories--" << std::endl;
+        removeGenre("Romance,Sci-Fi");
+        removeGenre("Romance,Sci-Fi"); // should print this genre doesn't exist
+        printAllCategories();
+        //Create a movie and add it to a category
+        std::cout << "--Adding Movies--" << std::endl;
+        addMovie("Movie1", "2019", "Romance", "Abdi", "Jogar, Goat", "39.5");
+        addMovie("Movie2", "2018", "Comedy,Fiction", "Abdi", "Jogar, Goat", "39.5");
+        addMovie("Movie3", "2018", "Comedy,Sci-Fi", "Abdi", "Jogar, Goat", "39.5");
+        printAllMovies();
         //Remove a movie from a category
+        std::cout << "--Removing Movies--" << std::endl;
+        removeMovie("Movie1", "Romance");
+        removeMovie("Movie2", "Comedy,Fiction");
+        printAllMovies();
+
+        //Remove movies based on categories:
+        std::cout << "--Adding Faux Movies--" << std::endl;
+        addMovie("Movie1", "2019", "Romance", "Abdi", "Jogar, Goat", "39.5");
+        addMovie("Movie2", "2018", "Comedy,Fiction", "Abdi", "Jogar, Goat", "39.5");
+        addMovie("Movie3", "2019", "Romance", "Abdi", "Jogar, Goat", "39.5");
+        addMovie("Movie4", "2018", "Comedy,Fiction", "Jogar", "Jogar, Goat", "39.5");
+        addMovie("Movie5", "2018", "Comedy,Sci-Fi", "Jogar", "Jogar, Goat", "39.5");
+        addMovie("Movie6", "2018", "Comedy,Sci-Fi", "Jogar", "Jogar, Goat", "39.5");
+        printAllMovies("Comedy,Sci-Fi");
+        std::cout << "--Deleting Category Movies--" << std::endl;
+        removeGenre("Comedy,Sci-Fi");
+        printAllMovies("Comedy,Sci-Fi");
         //Return a recommendations based on either
             //Director
+            std::cout << "--Checking Recommendation Function--";
+            sheet->set_selection(new Select_Directors(sheet, "Abdi", "director"));
+            sheet->print_selection(std::cout);
             //Actor
             //Genre
             //Year
@@ -50,6 +93,59 @@ public:
 
     }
 
+    void printAllMovies(){
+        for(Movie* m : genres) {
+            std::cout << m->getMovie();
+        }
+    }
+    void printAllMovies(std::string Genre){
+        std::string delimiter = ",";
+        if(Genre.find(delimiter) != std::string::npos) {
+            std::cout << getGenre(Genre)->getMovie();
+        }
+        else {
+            for (Movie *m : genres) {
+                if (m->getGenreName() == Genre) std::cout << m->getMovie();
+            }
+        }
+    }
+    /*
+    void printAllMovies(MovieSelector* select){
+        for (Movie *m : genres) {
+            if(m->isComposite() && m->subGenreExists()){
+                //loop through its subgenres
+                    select->select(m->getChildB()->getDirector());
+
+            }
+            else{
+                select->select(m->getChildB()->getDirector());
+            }
+        }
+    }
+     */
+    void printCategories(std::string genre){
+        std::string delimiter = ",";
+        if(genre.find(delimiter) != std::string::npos) {
+            std::cout << "This a subcategory named: " + getGenre(genre)->getGenreName();
+        }
+        else {
+            std::cout << "There are subcategories named: " + getGenre(genre)->printSubGenres();
+        }
+
+    }
+    void printAllCategories(){
+       for(Movie* m :genres){
+           if(m->subGenreExists()){
+               std::cout << "This genre is: " << m->getGenreName() << std::endl;
+               std::cout << "The genre: " << m->getGenreName() << " has subgenres: "
+               << m->printSubGenres() << std::endl;
+           }
+           else {
+               std::cout << "This genre is: " << m->getGenreName() << std::endl;
+           }
+       }
+
+    }
     //TODO: This function is called when user wants to add a movie
     //TODO: This checks to see if the genre exists and adds the movie
     void addMovie(std::string Title, std::string Year, std::string Genre, std::string Director, std::string Actors, std::string Metascore) {
@@ -59,26 +155,40 @@ public:
         getGenre(Genre)->addMovie(tmp);
     }
     //TODO: This function removes a movie
-    //TODO: In order to remove a movie, it must be removed from the spreadsheet, and from its genre
-    //TODO: Loop through the genre until you find its parent, delete the pointer to its setMovie class
-    void removeMovie(std::string Title){
-        //Find its genre
-        //Remove it from children
-
+    //TODO: In order to remove a movie
+    void removeMovie(std::string Title, std::string genre){
+        getGenre(std::move(genre))->remove(Title);
+        sheet->remove_row(Title);
     }
-
+    void removeSubGenre(Movie*m, std::string genre){
+        if(m->subGenre(genre) != nullptr) {
+            m->subGenre(genre)->removeAllChildren();
+            m->removeSubGenre(genre);
+        }
+    }
     //TODO: This function is called when the user wants to remove a genre:
     bool removeGenre(std::string genre) {
         if(!genreExists(genre)) {
-            std::cout << "This genre does not exist!";
+            std::cout << "This genre does not exist!\n";
             return false;
         }
-
-        for(int i =0; i<genres.size(); i++){
-            if (genres.at(i)->getGenreName().find(genre) != std::string::npos) {
-                delete genres.at(i);
-                genres.erase(genres.begin() + i);
-                return true;
+        std::string delimiter = ",";
+        if(genre.find(delimiter) != std::string::npos){
+            std::stringstream test(genre);
+            std::string token;
+            std::vector<std::string> tokens;
+            while (std::getline(test, token, ',')){
+                tokens.push_back(token);
+            }
+            removeSubGenre(getGenre(tokens.at(0)), tokens.at(1));
+        }
+        else {
+            for (int i = 0; i < genres.size(); i++) {
+                if (genres.at(i)->getGenreName().find(genre) != std::string::npos) {
+                    delete genres.at(i);
+                    genres.erase(genres.begin() + i);
+                    return true;
+                }
             }
         }
         return false;
@@ -89,7 +199,6 @@ public:
             return false;
         }
 
-
         std::string delimiter = ",";
         if(genre.find(delimiter) != std::string::npos) {
             std::stringstream test(genre);
@@ -99,24 +208,19 @@ public:
             while (std::getline(test, token, ',')){
                 tokens.push_back(token);
             }
+
             if (genreExists(tokens.at(0))){
-                return getGenre(tokens.at(0)) != nullptr;
+                return subGenreExists(getGenre(tokens.at(0)), tokens.at(1));
             }
-            /*
-            size_t pos = 0;
-            std::string token;
-            Movie *currentGenre = nullptr;
-            std::string::iterator end_pos = std::remove(token.begin(), token.end(), ' ');
-            token.erase(end_pos, token.end());
-            token = genre.substr(0, pos);
-            if (genreExists(token)) {
-                currentGenre = getGenre(token);
-                token.erase(end_pos, token.end());
-                token = genre.substr(0, pos);
-                return currentGenre->subGenre(token) != nullptr;
+            else if (!genreExists(tokens.at(0))){
+                return false;
             }
-            */
-        }else{
+            else {
+                std::cout << "Uh oh an error has occurred while checking to see if genreExists!\n";
+                return false;
+            }
+
+        } else{
                 for(Movie* m : genres){
                     if(m->getGenreName().find(genre) != std::string::npos){
                         return true;
@@ -125,9 +229,22 @@ public:
             }
         return false;
     }
+    Movie* getSubGenre(Movie* m, std::string subGenre){
+        if(m->subGenre(subGenre) != nullptr) return m->subGenre(subGenre);
+        return nullptr;
+    }
+    void createSubGenre(Movie*m, std::string subGenre){
+        if(m->isComposite()) m->addMovie(new MovieGenres(std::move(subGenre)));
+
+    }
+
+    bool subGenreExists(Movie* m, std::string subGenre){
+        return m->subGenre(std::move(subGenre)) != nullptr;
+    }
+
     Movie* getGenre(const std::string genre) {
         if(!genreExists(genre)){
-            std::cout << "\nThat genre doesn't exist. Creating it now.";
+            std::cout << "\nThat genre doesn't exist. Creating it now.\n";
             createGenre(genre);
             return getGenre(genre);
         }
@@ -141,23 +258,10 @@ public:
                 tokens.push_back(token);
             }
             if (genreExists(tokens.at(0))){
-                 return getGenre(tokens.at(0))->subGenre(tokens.at(1));
+                 return getSubGenre(getGenre(tokens.at(0)), tokens.at(1));
 
             }
 
-            /*
-            size_t pos = 0;
-            std::string token;
-            Movie *currentGenre = nullptr;
-            std::string::iterator end_pos = std::remove(token.begin(), token.end(), ' ');
-            token.erase(end_pos, token.end());
-            token = genre.substr(0, pos);
-            //get subGenre for this token
-            currentGenre = getGenre(token);
-            token.erase(end_pos, token.end());
-            token = genre.substr(0, pos);
-            return currentGenre->subGenre(token);
-             */
         } else {
             for(Movie* m : genres) {
                 if (m->getGenreName().find(genre) != std::string::npos) {
@@ -168,6 +272,7 @@ public:
         return nullptr;
     }
     //TODO: This function is called when the user wants to add a genre
+
     void createGenre(std::string genre) {
             std::string delimiter = ",";
             if(genre.find(delimiter) != std::string::npos) {
@@ -177,38 +282,26 @@ public:
                 while (std::getline(test, token, ',')){
                     tokens.push_back(token);
                 }
+
                 if (!genreExists(tokens.at(0))){
                     Movie* mov = new MovieGenres(tokens.at(0));
                     genres.push_back(mov);
-                    Movie* mov_ = new MovieGenres(tokens.at(1));
-                    mov->addMovie(mov);
+                    createSubGenre(mov, tokens.at(1));
                 }
-                else {
+                else if (genreExists(tokens.at(0))){
                     Movie* mov_ = new MovieGenres(tokens.at(1));
                     getGenre(tokens.at(0))->addMovie(mov_);
                 }
-                /*
-                size_t pos = 0;
-                std::string token;
-                Movie *currentGenre = nullptr;
-                std::string::iterator end_pos = std::remove(token.begin(), token.end(), ' ');
-                token.erase(end_pos, token.end());
-                token = genre.substr(0, pos);
-                //get subGenre for this token
-                currentGenre = getGenre(token);
-                token.erase(end_pos, token.end());
-                token = genre.substr(0, pos);
-                currentGenre->addMovie(new MovieGenres(token));
-                 */
+                else{
+                    std::cout << "Error creating Genre\n";
+                }
+
             } else {
                     Movie* mov = new MovieGenres(genre);
                     genres.push_back(mov);
                 }
         }
 
-    void printMovies(){
-
-    }
 
 
     /*

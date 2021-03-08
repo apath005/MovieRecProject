@@ -27,7 +27,12 @@ public:
     bool isComposite() override{
          return false;
      }
+    void removeAllChildren() {
 
+    }
+    void removeSubGenre(std::string genreName) {
+
+    }
     std::string getMovie() override {
         std::string result =
                 "Movie Title: " + movieInfo.at(0)
@@ -38,12 +43,16 @@ public:
                 + "\nMetascore: " + movieInfo.at(5) + "\n";
         return result;
     }
-
+    virtual std::string getMovieName() {
+        return movieInfo.at(0);
+    }
 
     std::string getGenreName() override {
         return "0";
     }
-
+    virtual std::string printSubGenres() {
+        return "";
+    }
      bool subGenreExists() override {
         return false;
     }
@@ -52,6 +61,12 @@ public:
         return nullptr;
     };
 
+    virtual std::string getDirector() {
+        return movieInfo.at(3);
+    }
+    virtual Movie* getChildB() {
+        return nullptr;
+    }
 
 };
 #endif //SETMOVIE_HPP

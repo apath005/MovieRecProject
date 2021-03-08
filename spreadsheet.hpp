@@ -35,7 +35,7 @@ public:
     void set_column_names(const std::vector<std::string>& names);
     void add_row(const std::vector<std::string>& row_data);
     int get_column_by_name(const std::string& name) const;
-
+    void remove_row(std::string title);
     int data_size();
 };
 

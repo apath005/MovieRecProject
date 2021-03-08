@@ -17,8 +17,8 @@ public:
 	    this->actorName = actorName;
     }
 
-    virtual bool select(const Spreadsheet* movie) const {
-        return movie->cell_data(row, column).find(actorName) != std::string::npos;
+    virtual bool select(const std::string movie) const {
+        return movie.find(actorName) != std::string::npos;
     }
 
     virtual bool select(const std::string &s) const {
