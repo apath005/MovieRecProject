@@ -12,7 +12,9 @@ public:
     MovieGenres(std::string genre) {
         this->genreName = std::move(genre);
     }
-
+    std::string getGenreName(){
+        return genreName;
+    }
     void addMovie(Movie* movie) override {
         this->children.push_back(movie);
         movie->setParent(this);

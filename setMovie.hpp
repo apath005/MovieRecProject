@@ -3,12 +3,14 @@
 #define SETMOVIE_HPP
 #include "Movie.hpp"
 
+#include <utility>
+
 class setMovie : public Movie {
 
     std::string movieTitle;
 public:
      setMovie(std::string movieName){
-         this->movieTitle = movieName;
+         this->movieTitle = std::move(movieName);
      }
     void addMovie(Movie *mov) override {
 
@@ -30,6 +32,9 @@ public:
         return movieTitle;
     }
 
+    std::string getGenreName() override {
+        return "0";
+    }
 
 };
 #endif //SETMOVIE_HPP
