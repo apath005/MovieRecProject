@@ -7,10 +7,10 @@
 
 class setMovie : public Movie {
 
-    std::string movieTitle;
+    std::vector<std::string> movieInfo;
 public:
-     setMovie(std::string movieName){
-         this->movieTitle = std::move(movieName);
+     setMovie(std::vector<std::string> movieInfo){
+         this->movieInfo = std::move(movieInfo);
      }
     void addMovie(Movie *mov) override {
 
@@ -29,8 +29,16 @@ public:
      }
 
     std::string getMovie() override {
-        return movieTitle;
+        std::string result =
+                "Movie Title: " + movieInfo.at(0)
+                + "\nYear: " + movieInfo.at(1)
+                + "\nGenre" + movieInfo.at(2)
+                + "\nDirector" + movieInfo.at(3)
+                + "\nActors" + movieInfo.at(4)
+                + "\nMetascore" + movieInfo.at(5) + "\n";
+        return result;
     }
+
 
     std::string getGenreName() override {
         return "0";
