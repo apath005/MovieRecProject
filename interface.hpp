@@ -41,28 +41,35 @@ public:
             //AND
             
 	std::string userOp;
-    	std::cout << "Would you like a Recommendation based on: " << std::endl;
+	std::cout << "------------MOVIE RECOMMENDER------------" << std::endl;
+    	std::cout << "Would you like a Recommendation based on:" << std::endl;
     	std::cout << "1: Director" << std::endl;
     	std::cout << "2: Actor" << std::endl;
     	std::cout << "3: Genre" << std::endl;
     	std::cout << "4: Year" << std::endl;
-    	std::cout << "5: AND\n" << std::endl;
+    	std::cout << "5: AND (recommendations with two criteria)\n" << std::endl;
     	std::cout << "Selection: ";
     	std::cin >> userOp;
     	std::cout << std::endl;
 
-    
     	int i = 0;
     	while(userOp[i]) {userOp[i] = tolower(userOp[i]); i++;}
 
     	if(userOp == "1" || userOp == "director") {
-        	return;
+        	addMovie();
     	}
     	else if(userOp == "2" || userOp == "actor") {
         	return;
     	}
     	else if(userOp == "3" || userOp == "genre") {
-        	return;
+		std::string genreName = "";
+        	std::cout << "What genre would you like recommendations for?" << std::endl;
+		std::cout << "Genre: ";
+		std::cin >> genreName;
+		
+		getGenre(genreName);
+
+		
     	}
     	else if(userOp == "4" || userOp == "year") {
         	return;
