@@ -19,7 +19,7 @@ public:
 
      };
 
-    void remove(std::string Movie) override {
+    bool remove(std::string Movie) override {
 
     };
 
@@ -66,6 +66,12 @@ public:
 
     virtual std::string getDirector() {
         return movieInfo.at(3);
+    }
+    virtual std::string getMovieYear() {
+        return movieInfo.at(1);
+    }
+    virtual std::string getActors() {
+
     }
     virtual Movie* getChildB() {
         return nullptr;

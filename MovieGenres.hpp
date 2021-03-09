@@ -62,15 +62,18 @@ public:
     std::string getMovieName() override{
         return "";
     }
-    void remove(std::string movieName) override {
+    bool remove(std::string movieName) override {
+        bool removed = false;
         for (int i = 0; i<children.size(); i++){
+            if(children.at(i)->isComposite()) removed = children.at(i)->remove(movieName);
             if (!children.at(i)->isComposite() && children.at(i)->getMovieName() == movieName) {
                 children.at(i)->setParent(nullptr);
                 delete children.at(i);
                 children.erase(children.begin() + i);
-
+                removed = true;
             }
         }
+        return removed;
     }
 
     void removeAllChildren() override {
@@ -113,13 +116,7 @@ public:
         std::string movies;
 
         for (Movie* m : children) {
-            if(m->subGenreExists()){
-                movies+="Main Genre: \n";
-            }
-            if(m->isComposite()){
-                movies+= "Sub Genre: " + m->getGenreName() + "\n";
-            }
-                movies += m->getMovie() + "\n";
+            movies += m->getMovie() + "\n";
         }
 
         return movies;
@@ -131,6 +128,10 @@ public:
         return nullptr;
     }
     virtual std::string getDirector() {
+        return "0";
+    }
+
+    virtual std::string getMovieYear() {
         return "0";
     }
 
