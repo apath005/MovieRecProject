@@ -41,7 +41,11 @@ public:
      * This will be the main function to accept user input and from there it return print the appropriate movie recommendation
      */
     void userInterface() {
-
+        addMovie("Movie1", "2019", "Romance", "Abdi", "Jogar,Anant", "55.5");
+        addMovie("Movie2", "2018", "Comedy,Fiction", "Anant", "Jogar,Abdi", "96");
+        addMovie("Movie3", "2017", "Comedy,Sci-Fi", "Jogar", "Anant,Abdi", "12");
+        userMenu();
+        /*
         //Create a category works
         createGenre("Romance");
         createGenre("Comedy");
@@ -110,9 +114,190 @@ public:
             std::cout << "--Checking Recommendation Function for AND--\n";
             sheet->set_selection(new Select_And(new Select_Year(sheet, "2018", "Year"), new Select_Actors(sheet, "Goat", "Actors")));
             sheet->print_selection(std::cout);
+            */
 
     }
 
+    void userAddMovie() {
+        std::string input;
+        std::string Title;
+        std::string Year;
+        std::string Genre;
+        std::string Director;
+        std::string Actors;
+        std::string Goat;
+        std::string Metascore;
+
+        while(input != "-1"){
+            std::cout << "You have chosen to create a movie. I will need a few details!\n";
+            std::cout << "\nFirst enter the movie name: ";
+            std::cin >> Title;
+            std::cout << "\nEnter the year of the movie!";
+            std::cin >> Year;
+            std::cout << "\nEnter the Genre of the movie. If the movie has a subcategory, Enter the main genre first followed by the Sub Genre(Ex: Fiction,Comedy)";
+            std::cin >> Genre;
+            std::cout << "\nEnter the Director or Directors of the movie! Split the names using a comma";
+            std::cin >> Director;
+            std::cout << "\nEnter the name of the Actors! Split the names using a comma";
+            std::cin >> Actors;
+            std::cout << "\nFinally enter the Metascore";
+            std::cin >> Metascore;
+
+            addMovie(Title, Year, Genre, Director, Actors, Metascore);
+
+            std::cout << "\nWill you be adding more movies?(Enter -1 for No, 1 for Yes)";
+            std::cin >> input;
+
+        }
+    }
+
+    void category() {
+
+        std::string input = "0";
+        std::string genre;
+        while(input != "-1"){
+            std::cout << "\nYou have chosen to create a category.";
+            std::cout << "\nWill this be a category or subcategory?(1 for Category, 2 For SubCategory)";
+            std::cin >> input;
+            if (input == "1"){
+                std::cout << "\nGreat lets create a Category!";
+                std::cout << "\nWhat is the name of this genre?";
+                std::cin >> genre;
+                std::cout << "\n Genre name is: " << genre;
+                std::cout << "\nCreating genre now!";
+                createGenre(genre);
+                std::cout << "\nWould you like to create another genre?(-1 for no, 1 for yes)";
+                std::cin >> input;
+            }
+        }
+
+    }
+
+    void userRemoveMovie() {
+        std::string input = "0";
+        std::string movieName;
+        while(input != "-1"){
+            std::cout << "\nYou have chosen to remove a movie!.";
+            std::cout << "\nIn order to delete a movie you need a Title(Enter 1 to continue! or -1 to quit)";
+            std::cin >> input;
+            if (input == "1"){
+                std::cout << "\nGreat lets remove a Movie!";
+                std::cout << "\nWhat is the name of this movie?";
+                std::cin >> movieName;
+                std::cout << "\n Movie name is: " << movieName;
+                std::cout << "\nDeleting that movie if it exists!";
+                removeMovie(movieName);
+                std::cout << "\nWould you like to delete another Movie?(-1 for no, 1 for yes)";
+                std::cin >> input;
+            }
+        }
+    }
+    Movie* getMovie(std::string movieName){
+        for(Movie* m : genres){
+            return m->getChild(movieName);
+        }
+        return nullptr;
+    }
+
+    void printSimilar(std::string type, std::string selection) {
+        sheet->set_selection(new Select_Directors(sheet, type, selection));
+        sheet->print_selection(std::cout);
+
+
+    }
+
+    void movieRecommendation() {
+        std::string input = "0";
+        std::string movieName;
+        std::string category;
+        while(input != "-1"){
+            std::cout << "\nYou have chosen to get a Movie Recommendation!.";
+            std::cout << "\nIn order to choose a movie, tell me whether you want it by: "
+                      << "\n\tDirector(D)"
+                      << "\n\tGenre(G)"
+                      << "\n\tActors(A)"
+                      << "\n\tYear(Y)";
+            std::cin >> input;
+            if (input == "D"){
+                std::cout << "\nGreat lets get you a similar?";
+                std::cout << "\nWhat is the name of this movie you want it similar too?";
+                std::cin >> movieName;
+                std::cout << "\n Movie name is: " << movieName;
+                std::cout << "\n Greate lets pull that movie!";
+                if (getMovie(movieName) == nullptr){
+                    std::cout << "That movie doesn't exist. Lets create it!";
+                    userAddMovie();
+                }
+                std::cout << "\nSimilar movies by director is: ";
+                printSimilar(getMovie(movieName)->getDirector(), "Director");
+                std::cout << "\nWould you like another recommendation?(-1 for no, 1 for yes)";
+                std::cin >> input;
+            }
+        }
+
+    }
+
+    void userRemoveGenre() {
+        std::string input = "0";
+        std::string genreName;
+        std::string category;
+        while(input != "-1") {
+            std::cout << "\nYou have chosen remove a Genre or SubGenre!.";
+            std::cout
+                    << "\nWhat is the name of this Genre/SubGenre(If it is a SubGenre split by using a comma(Ex:Fiction,Sci-Fi)?";
+            std::cin >> genreName;
+            std::cout << "\n Genre name is: " << genreName;
+            std::cout
+                    << "\nWarning! THis will also delete all movies under this genre, do you want to continue?(Y for Yes, N for No)";
+            std::cin >> input;
+            if (input == "N") {
+                std::cout << "\nDeleting that genre if it exists!";
+                removeGenre(genreName);
+                std::cout << "\nWould you like to delete another Movie?(-1 for no, 1 for yes)";
+                std::cin >> input;
+            }
+            else {
+                std::cout << "\nYou have decided not to delete this genre, would you like to delete a genre or exit to main menu?(-1 to exit, 1 to stay)";
+            }
+        }
+    }
+
+    bool userMenu() {
+        std::cout << "Welcome to the Movie Recommender!\n"
+                  << "This program allows you to create and remove genres and subgenres, add movies and remove them "
+                     "and get a recommendation we think you would like!.\n";
+        std::cout << "Ready?\n";
+        std::string input;
+        std::cin >> input;
+
+        while(input != "-1") {
+            std::string userInput;
+            std::cout << "Your options are as below: \n";
+            std::cout << "1: Create a Category/SubCategory \n";
+            std::cout << "2: View all Categories/SubCategories\n";
+            std::cout << "3: View Movies \n";
+            std::cout << "4: Add a Movie\n";
+            std::cout << "5: Remove a Category/SubCategory \n";
+            std::cout << "6: Remove a Movie \n";
+            std::cout << "7: Getting a movie recommendation!\n";
+            std::cout << "-1: quit\n";
+            std::cin >> userInput;
+
+            if (userInput == "1") category();
+            else if (userInput == "2") printAllCategories();
+            else if (userInput == "3") printAllMovies();
+            else if (userInput == "4") userAddMovie();
+            else if (userInput == "5") userRemoveGenre();
+            else if (userInput == "6") userRemoveMovie();
+            else if (userInput == "7") movieRecommendation();
+            else if (userInput == "-1") input = "-1";
+            else {
+                std::cout << "That wasn't a corrent input! Please try again!\n";
+            }
+        }
+        std::cout << "Have a good day!";
+
+    }
     void printAllMovies(){
         for(Movie* m : genres) {
             std::cout << m->getMovie();
@@ -189,9 +374,28 @@ public:
     }
     //TODO: This function removes a movie
     //TODO: In order to remove a movie
-    void removeMovie(std::string Title, std::string genre){
-        getGenre(std::move(genre))->remove(Title);
-        sheet->remove_row(Title);
+    void removeMovie(std::string Title){
+        bool exists = false;
+        for(Movie* m: genres) {
+            if(m->isComposite()){
+                if(m->getChild(Title) != nullptr){
+                    exists = true;
+                    m->remove(Title);
+                }
+            }
+            else if(m->getChild(Title) != nullptr){
+                exists = true;
+                m->remove(Title);
+            }
+
+        }
+        if(exists){
+            sheet->remove_row(Title);
+            std::cout << "\nMovie successfully removed!";
+        }
+        else{
+            std::cout << "\nThat movie does not exist!";
+        }
     }
     void removeSubGenre(Movie*m, std::string genre){
         if(m->subGenre(genre) != nullptr) {

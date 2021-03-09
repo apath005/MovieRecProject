@@ -38,7 +38,6 @@ public:
     }
     bool subGenreExists() override {
         //if there is a subGenre return true
-
         for(Movie* m: children){
             if (m->isComposite()) return true;
         }
@@ -46,9 +45,16 @@ public:
     }
 
     Movie* getChild(std::string movieName) override {
-        for (Movie* m : children){
-            if (m->getMovie() == movieName) {
-                return m;
+        for(Movie* m : children){
+            if(m->isComposite()) {
+                if(m->getMovieName() == movieName) {
+                    return m;
+                }
+            }
+            else {
+                if(m->getMovieName() == movieName) {
+                    return m;
+                }
             }
         }
         return nullptr;
