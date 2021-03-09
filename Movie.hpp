@@ -24,7 +24,7 @@ public:
 
     virtual void addMovie(Movie *mov){}
 
-    virtual void remove(std::string Movie){}
+    virtual bool remove(std::string Movie){}
 
     virtual Movie* getChild(std::string movieName) = 0 ;
 
@@ -39,5 +39,6 @@ public:
     virtual std::string printSubGenres() = 0;
     virtual std::string getDirector() = 0;
     virtual Movie* getChildB() = 0;
+    virtual std::string getMovieYear() = 0;
 };
 #endif
