@@ -64,14 +64,14 @@ on each data set. The strategy pattern will be helpful in building a tree that s
  3. run the executable "./recommender"
  4. Follow prompts on the Main Menu screen:
  > Choose from either:
- > 1: Create a Category/SubCategory \n
- > 2: View all Categories/SubCategories \n
- > 3: View Movies
- > 4: Add a Movie
- > 5: Remove a Category/SubCategory
- > 6: Remove a Movie
- > 7: Getting a movie recommendation!
- > -1: quit
+ > * 1: Create a Category/SubCategory
+ > * 2: View all Categories/SubCategories 
+ > * 3: View Movies
+ > * 4: Add a Movie
+ > * 5: Remove a Category/SubCategory
+ > * 6: Remove a Movie
+ > * 7: Getting a movie recommendation!
+ > * -1: quit
  5. View the database of films, and go ahead and find yourself a perfect movie recommendation!
 
  ## Testing
