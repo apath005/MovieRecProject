@@ -32,9 +32,34 @@ on each data set. The strategy pattern will be helpful in building a tree that s
  
  ## Screenshots
  ![WELCOMEScreen](https://user-images.githubusercontent.com/77028776/110581980-592d2700-8120-11eb-8049-1e6a722eb488.PNG)
- "Welcome" Menu for user
+ "Welcome" for user with program details
  
+ ![MainMenu](https://user-images.githubusercontent.com/77028776/110582423-0bfd8500-8121-11eb-9c9b-65e06feab2e8.png)
+ Main Menu with user options
  
+ ![CreateCategories](https://user-images.githubusercontent.com/77028776/110582288-dc4e7d00-8120-11eb-963e-90e51149faad.png)
+ Output of Option for Creating Movie Categories (Genres)
+ 
+ ![ViewCategories](https://user-images.githubusercontent.com/77028776/110582533-34857f00-8121-11eb-916d-e6ed2e96a5e5.png)
+ Output of Option for Viewing Categories (Genres) and subGenres
+ 
+ ![VIEWMovies](https://user-images.githubusercontent.com/77028776/110582744-7f06fb80-8121-11eb-8095-bf1ff5f6c2ff.png)
+ Output for Option of Viewing All Movies (sample output)
+ 
+ ![CreatingMovie](https://user-images.githubusercontent.com/77028776/110583161-1d935c80-8122-11eb-944a-1f025216e4ef.png)
+ Output for Option of Creating a Movie
+ 
+ ![DeleteGenre](https://user-images.githubusercontent.com/77028776/110583223-3734a400-8122-11eb-8aa8-41ebf5a57339.png)
+ Output for Option of Removing a Genre/ subGenres
+ 
+ ![DeleteMovie](https://user-images.githubusercontent.com/77028776/110583340-664b1580-8122-11eb-8313-a7c18ab4c691.png)
+ Output for Option of Removing a Movie
+ 
+ ![RECbyGenre](https://user-images.githubusercontent.com/77028776/110583403-7f53c680-8122-11eb-8669-2af58f915640.png)
+ Output for Option of Recommendation by Genre
+ 
+ ![RECbyDirector](https://user-images.githubusercontent.com/77028776/110583473-97c3e100-8122-11eb-9412-8b07a3124b37.png)
+ Output for Option of Recommendation by Director
  > Screenshots of the input/output after running your application
  ## Installation/Usage
  > Instructions on installing and running your application
