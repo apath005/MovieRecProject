@@ -41,10 +41,34 @@ public:
      */
     void userInterface() {
         addMovie("Movie1", "2019", "Romance", "Abdi", "Jogar,Anant", "55.5");
-        addMovie("Movie2", "2018", "Comedy", "Anant", "Jogar,Abdi", "96");
-        addMovie("Movie4", "2017", "Comedy,Fiction", "Abdi", "Anant", "15");
-        addMovie("Movie3", "2017", "Comedy,Fiction", "Jogar", "Anant,Abdi", "12");
-        userMenu();
+        addMovie("Movie2", "2018", "Comedy,Fiction", "Anant", "Jogar,Abdi", "96");
+        addMovie("Movie3", "2017", "Comedy,Sci-Fi", "Jogar", "Anant,Abdi", "12");
+	addMovie("Mad_Max:_Fury_Road","2015","Action,Adventure","George Miller","Tom Hardy","97");
+ 	addMovie("Logan","2017","Fantasy,Adventure","James Mangold","Hugh Jackman","93");
+	addMovie("The_Lion_King","1994","Animation,Adventure","Roger Allers,Rob Minkoff","Matthew Broderick","93");
+	addMovie("Star_Wars:_Episode_V_-_The_Empire_Strikes_Back", "1980", "Sci Fi,Fantasy","Irvin Kershner", "Mark Hamill", "94");
+	addMovie("Back_To_The_Future", "1985", "Sci Fi,Adventure", "Robert Zemeckis", "Michael J. Fox", "96");
+	addMovie("Jurassic_Park", "1993", "Sci Fi,Action", "Steven Spielberg", "Sam Niell", "91");
+	addMovie("Monty_Python_and_the_Holy_Grail", "1975", "Comedy", "Terry Gilliam,Terry Jones", "Graham Chapman", "97");
+	addMovie("Coco", "2017", "Comedy", "Lee Unkrich", "Anthony Gonzalez", "97");
+	addMovie("One_Upon_A_Time_In_Hollywood", "2019", "Drama,Comedy", "Quentin Tarantino", "Leonardo DiCaprio,Brad Pitt", "85");
+	addMovie("La La Land","2016","Drama,Comedy","Damien Chazelle", "Ryan Gosling,Emma Stone", "91" );
+	addMovie("Ghostbusters", "1984", "Adventure,Comedy", "Ivan Reitman", "Bill Murray", "97");
+	addMovie("The_Truman_Show", "1998", "Drama,Comedy", "Peter Weir", "Jim Carrey", "95");
+	addMovie("The_Exorcist", "1973", "Horror", "William Friedkin", "Ellen Burstyn", "83");
+	addMovie("Hereditary", "2018", "Horror,Thriller", "Ari Aster", "Toni Collette", "89");
+	addMovie("The_Shining", "1980", "Horror,Thriller", "Stanley Kubrick", "Jack Nicholson", "84");
+	addMovie("The_Conjuring", "2013", "Horror,Thriller", "James Wan", "Vera Farmiga", "86");
+	addMovie("The_Ring", "2002", "Horror,Thriller", "Gore Verbinski", "Naomi Watts", "71");
+	addMovie("Halloween", "1978", "Horror,Slasher", "John Carpenter", "Jamie Lee Curtis", "96");
+	addMovie("Insidious", "2010", "Horror,Thriller", "James Wan", "Patrick Wilson", "66");
+	addMovie("It", "2017", "Horror,Thriller", "Andy Muschietti", "Bill Skarsgard", "86");
+	addMovie("Casablanca", "1942", "Drama", "Michael Curtiz", "Humphrey Bogart,Ingrid Bergman", "99");
+	addMovie("The_Shape_of_Water", "2017", "Romance,Fantasy", "Guillermo del Toro", "Sally Hawkins", "92");
+	addMovie("The_Big_Sick", "2017", "Romance", "Michael Showalter", "Kumail Nanjiani", "98");
+	addMovie("Her", "2013", "Drama,Comedy", "Spike Jonze", "Joaquin Pheonix,Scarlett Johansson", "94");
+	addMovie("Groundhog_Day", "1993", "Romance", "Harold Ramis", "Bill Murray", "96"); 
+	userMenu();
 
     }
 
