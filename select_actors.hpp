@@ -10,20 +10,23 @@ class Select_Actors: public Select_Column
 {
 public:
     std::string actorName;
-    std::string movieName;
-    Select_Actors(const Spreadsheet* movie, const std::string& movieName, const std::string actorName, const std::string& columnName) : Select_Column(movie, columnName)
+    Spreadsheet* sheet;
+    Select_Actors(Spreadsheet* movie, const std::string actorName, const std::string& columnName) : Select_Column(movie, columnName)
     {
-        this->movieName = movieName;
 	    this->actorName = actorName;
+	    this->sheet = movie;
     }
 
-    virtual bool select(const Spreadsheet* movie) const {
-        return movie->cell_data(row, column).find(actorName) != std::string::npos;
+    virtual bool select(const Spreadsheet* sheet, int row) const{
+        return sheet->cell_data(row, column).find(actorName) != std::string::npos;
     }
 
-    virtual bool select(const std::string &s) const {
+    bool select(const std::string &s) const override {
 
         return true;
+
+    }
+    ~Select_Actors() {
 
     }
 };

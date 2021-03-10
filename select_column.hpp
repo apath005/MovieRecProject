@@ -8,20 +8,24 @@ class Select_Column: public MovieSelector
 {
 protected:
     int column;
-    int row;
 public:
-    Select_Column(const Spreadsheet* dataset, const std::string& movieName)
+    Select_Column(const Spreadsheet* dataset, const std::string& movieColumn)
     {
-        column = dataset->get_column_by_name(movieName);
+        column = dataset->get_column_by_name(movieColumn);
+        int r = column;
     }
 
-    virtual bool select(const Spreadsheet* dataset) const
+    virtual bool select(const Spreadsheet* dataset, int row) const
     {
         return select(dataset->cell_data(row, column));
     }
 
-    // Derived classes implement this interface to select from movie datasets
+    // Derived classes implement this interface to select from movie dataset
     virtual bool select(const std::string& s) const = 0;
-    };
+
+    ~Select_Column() {
+
+    }
+};
 
 #endif

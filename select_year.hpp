@@ -10,22 +10,22 @@ class Select_Year: public Select_Column
 {
 public:
     std::string movieYear;
-    std::string movieName;
 
-    Select_Year(const Spreadsheet* movie, const std::string& movieName, const std::string movieYear, const std::string& columnName): Select_Column(movie, columnName)
+    Select_Year(const Spreadsheet* movie, const std::string movieYear, const std::string& columnName): Select_Column(movie, columnName)
     {
-        this->movieName = movieName;
         this->movieYear = movieYear;
     }
 
-    virtual bool select(const Spreadsheet* movie) const {
+    virtual bool select(const Spreadsheet* movie, int row) const {
         return movie->cell_data(row, column).find(movieYear) != std::string::npos;
     }
 
     virtual bool select(const std::string& s) const {
         return false;
+    }
+    ~Select_Year() {
 
     }
-}
+};
 
 #endif // SELECT_YEAR_H

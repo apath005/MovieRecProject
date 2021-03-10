@@ -9,30 +9,12 @@ int main() {
     /*
      *Test function requires more testing and needs to be moved to its own class
      */
+    auto* sheet = new Spreadsheet();
+    auto* Interface_ = new Interface(sheet);
 
-    Movie *comedy = new MovieGenres("Comedy");
-    Movie *romance = new MovieGenres("Romance");
-
-    Movie *rushHour = new setMovie("Rush Hour");
-    Movie *rushHour2 = new setMovie("Rush Hour 2");
-    Movie *theZoo = new setMovie("The Zoo");
-
-
-    comedy->addMovie(rushHour);
-    comedy->addMovie(rushHour2);
-    comedy->addMovie(theZoo);
-
-    romance->addMovie(comedy);
-
-    std::cout << romance->getMovie();
-
-
-    auto *sheet = new Spreadsheet;
-    auto *inter = new Interface(sheet);
-
-    inter->scrapeCSVFiles();
-    //sheet->print_selection(std::cout);
-    inter->testMovies();
-
+    Interface_->userInterface();
+    delete Interface_;
+    sheet->clear();
+    delete sheet;
     return 0;
 };
