@@ -24,7 +24,7 @@ public:
         return false;
     }
     ~Select_Year() {
-        delete this;
+
     }
 };
 

@@ -24,7 +24,7 @@ public:
     virtual bool select(const std::string& s) const = 0;
 
     ~Select_Column() {
-        delete this;
+
     }
 };
 

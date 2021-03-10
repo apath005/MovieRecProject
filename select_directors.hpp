@@ -28,7 +28,7 @@ public:
 
     }
     ~Select_Directors() {
-        delete this;
+
     }
 
 
