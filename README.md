@@ -18,9 +18,9 @@ The composite and strategy patterns can then be integrated to call on the base c
 on each data set. The strategy pattern will be helpful in building a tree that searches and performs operations on each node in the background of the program to return a value specific to the user.
 
  > ## Phase II
-![MR_Diagram](https://user-images.githubusercontent.com/50225081/108142278-4f148d00-707a-11eb-90ac-7d7581b4b81d.png)
+![UPDATED_UML](https://user-images.githubusercontent.com/77028776/110581505-875e3700-811f-11eb-9d86-3462d1833eba.png)
 
-> * NOTE: WE HAVE CHANGED OUR ORIGINAL PROPOSAL PATTERNS FROM STRATEGY AND VISITOR TO STRATEGY AND COMPOSITE
+> * NOTE: WE HAVE CHANGED OUR ORIGINAL PROPOSAL PATTERNS FROM STRATEGY AND VISITOR TO STRATEGY, COMPOSITE, AND FACTORY.
 
  > * The diagram above shows our class structure and how we plan on integrating the Compisite pattern and the Strategy pattern. We can see above that we will have the Movie Recommender Interface hold our final movie recommendation. This is a design choice so we have a family of classes that allow use different algorithms that will allow us to aggregate data that meets our required patterns.  The Strategy pattern will have an algorithm that will allow it to choose the best possible movie based on the parameters and will implement a final conclusive movie recommendation. We can see from the diagram above that we will have a select function that will allow for a recusively called visit to each of the selected classes and aggregate a movie recommendation from visiting inside those classes. The composite pattern will allow us to store movies for genres in a tree data data structure. These two will allow users to choose enter a movie and from create a perfect movie match/es. 
  
