@@ -83,14 +83,14 @@ public:
         std::string Metascore;
 
         while(input != "-1"){
-            std::cout << "You have chosen to create a movie. I will need a few details!\n";
+            std::cout << "\nYou have chosen to create a movie. I will need a few details!\n";
             std::cout << "\nFirst enter the movie name: ";
             std::getline(std::cin, Title);
             std::cout << "\nEnter the year of the movie!";
             std::getline(std::cin, Year);
             std::cout << "\nEnter the Genre of the movie. If the movie has a subcategory, Enter the main genre first followed by the Sub Genre(Ex: Fiction,Comedy)";
             std::getline(std::cin, Genre);
-            std::cout << "\nEnter the Director or Directors of the movie! Split the names using a comma";
+            std::cout << "\nEnter the Director of the movie! Split the names using a comma";
             std::getline(std::cin, Director);
             std::cout << "\nEnter the name of the Actors! Split the names using a comma";
             std::getline(std::cin, Actors);
@@ -107,7 +107,7 @@ public:
 
     void category() {
 
-        std::string input = "0";
+        std::string input = "";
         std::string genre;
         while(input != "-1"){
             std::cout << "\nYou have chosen to create a category.";
@@ -130,7 +130,7 @@ public:
     }
 
     void userRemoveMovie() {
-        std::string input = "0";
+        std::string input = "";
         std::string movieName;
         while(input != "-1"){
             std::cout << "\nYou have chosen to remove a movie!.";
@@ -150,7 +150,13 @@ public:
     }
     Movie* getMovie(std::string movieName){
         for(Movie* m : genres){
-            return m->getChild(movieName);
+            if(m->getChild(movieName) == nullptr){
+                continue;
+            }
+            else {
+                return m->getChild(movieName);
+            }
+
         }
         return nullptr;
     }
@@ -191,9 +197,9 @@ public:
                 std::cout << "\nWhat is the name of this movie you want it similar too? ";
                 std::getline(std::cin, movieName);
                 std::cout << "\n Movie name is: " << movieName;
-                std::cout << "\n Greate lets pull that movie!";
+                std::cout << "\n Great lets pull that movie!";
                 if (getMovie(movieName) == nullptr){
-                    std::cout << "That movie doesn't exist. Lets create it!";
+                    std::cout << "That movie doesn't exist. Lets create it!\n";
                     userAddMovie();
                 }
                 std::cout << "\nSimilar movies by director is: ";
@@ -206,8 +212,8 @@ public:
                 std::cout << "\nWhat is the name of this Actor you want? ";
                 std::getline(std::cin, movieName);
                 std::cout << "\nActor name is: " << movieName;
-                std::cout << "\nGreate lets pull a similar movie!";
-                std::cout << "\nSimilar movies by director is: ";
+                std::cout << "\nGreat lets pull a similar movie!";
+                std::cout << "\nSimilar movies by Actor is: ";
                 printActors((movieName));
                 std::cout << "\nWould you like another recommendation?(-1 for no, 1 for yes) ";
                 std::getline(std::cin, input);
@@ -234,7 +240,8 @@ public:
                 std::cout << "\nWould you like another recommendation?(-1 for no, 1 for yes) ";
                 std::getline(std::cin, input);
             }
-            else if (input == "-1") input = "-1";
+
+            if (input == "-1") input = "-1";
             else if (input == "1") input = "1";
             else{
                 std::cout << "\nThat wasn't a correct input, please try again! (If you would like to quit press -1)";
@@ -260,7 +267,7 @@ public:
             if (input == "Y") {
                 std::cout << "\nDeleting that genre if it exists!";
                 removeGenre(genreName);
-                std::cout << "\nWould you like to delete another Movie?(-1 for no, 1 for yes) ";
+                std::cout << "\nWould you like to delete another Genre?(-1 for no, 1 for yes) ";
                 std::getline(std::cin, input);
             }
             else {
@@ -388,10 +395,10 @@ public:
         }
         if(exists){
             sheet->remove_row(Title);
-            std::cout << "\nMovie successfully removed!";
+            std::cout << "\nMovie successfully removed!\n";
         }
         else{
-            std::cout << "\nThat movie does not exist!";
+            std::cout << "\nThat movie does not exist!\n";
         }
     }
     void removeSubGenre(Movie*m, std::string genre){
@@ -478,7 +485,6 @@ public:
 
     Movie* getGenre(const std::string genre) {
         if(!genreExists(genre)){
-            std::cout << "\nThat genre doesn't exist. Creating it now.\n";
             createGenre(genre);
             return getGenre(genre);
         }

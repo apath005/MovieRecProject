@@ -3,12 +3,13 @@
 #define GENRE_HPP
 #include "MovieSelector.hpp"
 #include <iostream>
+#include <utility>
 class Select_Genre : public MovieSelector {
 
 public:
     std::string genreName;
     Select_Genre(std::string genreName) {
-        this->genreName = genreName;
+        this->genreName = std::move(genreName);
     }
 
     virtual bool select(const std::string& s) const {
