@@ -73,6 +73,7 @@ on each data set. The strategy pattern will be helpful in building a tree that s
  > * 7: Getting a movie recommendation!
  > * -1: quit
  5. View the database of films, and go ahead and find yourself a perfect movie recommendation!
+ 6. Exit Program.
 
  ## Testing
  > How was your project tested/validated? If you used CI, you should have a "build passing" badge in this README.
