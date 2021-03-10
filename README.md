@@ -59,7 +59,7 @@ on each data set. The strategy pattern will be helpful in building a tree that s
  Output for Option of Recommendation by Director
 
  ## Installation/Usage
- 1. run cmake3.
+ 1. run cmake3 .
  2. run make
  3. run the executable "./recommender"
  4. Follow prompts on the Main Menu screen:
@@ -72,7 +72,7 @@ on each data set. The strategy pattern will be helpful in building a tree that s
  > * 6: Remove a Movie
  > * 7: Getting a movie recommendation!
  > * -1: quit
- 5. View the database of films, and go ahead and find yourself a perfect movie recommendation!
+ 5. View the database of films, and go ahead and find yourself a perfect movie recommendation by Actor, Director, Year, or Genre!
  6. Exit Program.
 
  ## Testing
