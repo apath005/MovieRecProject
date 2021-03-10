@@ -44,6 +44,9 @@ public:
         addMovie("Movie2", "2018", "Comedy", "Anant", "Jogar,Abdi", "96");
         addMovie("Movie4", "2017", "Comedy,Fiction", "Abdi", "Anant", "15");
         addMovie("Movie3", "2017", "Comedy,Fiction", "Jogar", "Anant,Abdi", "12");
+        addMovie("Movie5", "2017", "Fiction", "Jogar", "Anant,Abdi", "12");
+        addMovie("Movie6", "2017", "Action", "John", "Hulk,Thor", "95");
+
         userMenu();
 
     }
@@ -126,6 +129,8 @@ public:
     }
     Movie* getMovie(std::string movieName){
         for(Movie* m : genres){
+            int genreSize = genres.size();
+            std::string gen = m->getGenreName();
             if(m->getChild(movieName) == nullptr){
                 continue;
             }

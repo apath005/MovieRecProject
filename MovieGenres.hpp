@@ -48,13 +48,11 @@ public:
         for(Movie* m : children){
             if(m->isComposite()) {
                 if(m->getChild(movieName)->getMovieName() == movieName) {
-                    std::string blue = m->getMovieYear();
                     return m->getChild(movieName);
                 }
             }
             else {
                 if(m->getMovieName() == movieName) {
-                    std::string red = m->getMovieYear();
                     return m;
                 }
             }
@@ -62,7 +60,7 @@ public:
         return nullptr;
     }
     std::string getMovieName() override{
-        return "";
+        return "0";
     }
     bool remove(std::string movieName) override {
         bool removed = false;
