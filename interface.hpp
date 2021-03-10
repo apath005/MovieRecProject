@@ -156,11 +156,6 @@ public:
         sheet->set_selection(new Select_Year(sheet, year, "Year"));
         sheet->print_selection(std::cout);
     }
-
-    void printMovieByGenre(Movie *pMovie) {
-
-    }
-
     void movieRecommendation() {
         std::string input = "0";
         std::string movieName;
@@ -206,8 +201,7 @@ public:
                 std::cout << "\nGenre name is: " << movieName;
                 std::cout << "\nGreat lets pull movies in that genre!";
                 std::cout << "\nMovies: \n";
-                //printAllMovies((movieName));
-                printMovieByGenre(getGenre(movieName));
+                printAllMovies((movieName));
                 std::cout << "\nWould you like another recommendation?(-1 for no, 1 for yes) ";
                 std::getline(std::cin, input);
             }

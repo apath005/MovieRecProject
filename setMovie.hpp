@@ -12,7 +12,7 @@ public:
     ~setMovie() {
 
     }
-     setMovie(std::vector<std::string> movieInfo){
+      setMovie(std::vector<std::string> movieInfo){
          this->movieInfo = std::move(movieInfo);
      }
     void addMovie(Movie *mov) override {
@@ -70,9 +70,7 @@ public:
     virtual std::string getMovieYear() {
         return movieInfo.at(1);
     }
-    virtual std::string getActors() {
 
-    }
     virtual Movie* getChildB() {
         return nullptr;
     }
