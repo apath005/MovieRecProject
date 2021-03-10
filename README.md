@@ -90,4 +90,4 @@ on each data set. The strategy pattern will be helpful in building a tree that s
 
  ## Testing
  Our project was tested and validated using the Google Test Framework. We used the google test submodule within our repository to test a variety of functions used across each design pattern. All test cases are recorded in test.cpp, and tests can be viewed and executed using the "./test" executable.
- 
+ Functions tested include: Select_Directors(), Select_Actors(), Select_Year(), Select_Genre(), addMovie(), genreExists(), removieMovie()
