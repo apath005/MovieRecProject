@@ -17,17 +17,17 @@ public:
 	    this->sheet = movie;
     }
 
-    virtual bool select(Spreadsheet* sheet, int row) const {
+    virtual bool select(const Spreadsheet* sheet, int row) const{
         return sheet->cell_data(row, column).find(actorName) != std::string::npos;
     }
 
-    virtual bool select(const std::string &s) const {
+    bool select(const std::string &s) const override {
 
         return true;
 
     }
     ~Select_Actors() {
-        delete this;
+
     }
 };
 
