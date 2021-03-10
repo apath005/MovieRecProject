@@ -89,5 +89,5 @@ on each data set. The strategy pattern will be helpful in building a tree that s
  6. Exit Program.
 
  ## Testing
- > How was your project tested/validated? If you used CI, you should have a "build passing" badge in this README.
+ Our project was tested and validated using the Google Test Framework. We used the google test submodule within our repository to test a variety of functions used across each design pattern. All test cases are recorded in test.cpp, and tests can be viewed and executed using the "./test" executable.
  
