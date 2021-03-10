@@ -31,9 +31,6 @@ on each data set. The strategy pattern will be helpful in building a tree that s
  > * Plan one more sprint (that you will not necessarily complete before the end of the quarter). Your In-progress and In-testing columns should be empty (you are not doing more work currently) but your TODO column should have a full sprint plan in it as you have done before. This should include any known bugs (there should be some) or new features you would like to add. These should appear as issues/cards on your Kanban board. 
  
  ## Screenshots
- ![WELCOMEScreen](https://user-images.githubusercontent.com/77028776/110581980-592d2700-8120-11eb-8049-1e6a722eb488.PNG)
- "Welcome" for user with program details
- 
  ![MainMenu](https://user-images.githubusercontent.com/77028776/110582423-0bfd8500-8121-11eb-9c9b-65e06feab2e8.png)
  Main Menu with user options
  
@@ -60,7 +57,7 @@ on each data set. The strategy pattern will be helpful in building a tree that s
  
  ![RECbyDirector](https://user-images.githubusercontent.com/77028776/110583473-97c3e100-8122-11eb-9412-8b07a3124b37.png)
  Output for Option of Recommendation by Director
- > Screenshots of the input/output after running your application
+
  ## Installation/Usage
  > Instructions on installing and running your application
  ## Testing
