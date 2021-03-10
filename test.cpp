@@ -48,7 +48,7 @@ TEST(RecommenderTest, ActorsTestFilmTitanic) {
         sheet->set_column_names({"Title", "Year", "Genre", "Director", "Actors", "Metascore"});
         sheet->add_row({"Titanic", "1997", "Romance", "James Cameron", "DiCaprio,Winset", "78"});
         std::stringstream s;
-        sheet->set_selection(new Select_Actors(sheet, "Dicaprio,Winset", "Actors"));
+        sheet->set_selection(new Select_Actors(sheet, "DiCaprio,Winset", "Actors"));
         sheet->print_selection(s);
         EXPECT_EQ("\nMovie Title: Titanic\nYear: 1997\nGenre: Romance\nDirectors: James Cameron\nActors: DiCaprio,Winset\nMetascore: 78\n",s.str());
 }
