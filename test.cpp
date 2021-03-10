@@ -177,10 +177,27 @@ TEST(RecommenderTest, getMovieTest) {
         auto* Interface_ = new Interface(sheet);
         sheet->set_column_names({"Title", "Year", "Genre", "Director", "Actors", "Metascore"});
         Interface_->addMovie("Halloween", "1978", "Horror,Slasher", "John Carpenter", "Jamie Lee Curtis", "96");
-	Movie * movieTest = Interface_->getMovie("Halloween");
+	    Movie * movieTest = Interface_->getMovie("Halloween");
         EXPECT_EQ(Interface_->getMovie("Halloween"), movieTest);
 }
 
+TEST(RecommenderTest, removeMovie) {
+    auto* sheet = new Spreadsheet();
+    auto* Interface_ = new Interface(sheet);
+    sheet->set_column_names({"Title", "Year", "Genre", "Director", "Actors", "Metascore"});
+    Interface_->addMovie("Halloween", "1978", "Horror,Slasher", "John Carpenter", "Jamie Lee Curtis", "96");
+    Movie * movieTest = Interface_->getMovie("Halloween");
+    EXPECT_EQ(Interface_->getMovie("Halloween"), movieTest);
+    EXPECT_EQ(Interface_->removeMovie("Halloween"), true);
+}
+
+TEST(RecommenderTest, removeMovieFalse) {
+    auto* sheet = new Spreadsheet();
+    auto* Interface_ = new Interface(sheet);
+    sheet->set_column_names({"Title", "Year", "Genre", "Director", "Actors", "Metascore"});
+    Interface_->addMovie("Halloween", "1978", "Horror,Slasher", "John Carpenter", "Jamie Lee Curtis", "96");
+    EXPECT_EQ(Interface_->removeMovie("Hallowe"), false);
+}
 TEST(RecommenderTest, genreExistsTest) {
         auto* sheet = new Spreadsheet();
         auto* Interface_ = new Interface(sheet);
@@ -197,15 +214,34 @@ TEST(RecommenderTest, genreDoesNotExistTest) {
         EXPECT_EQ(Interface_->genreExists("Comedy"), false);
 }
 
+
 TEST(RecommenderTest, multipleGenreExistsTest) {
         auto* sheet = new Spreadsheet();
         auto* Interface_ = new Interface(sheet);
         sheet->set_column_names({"Title", "Year", "Genre", "Director", "Actors", "Metascore"});
         Interface_->addMovie("Halloween", "1978", "Horror,Slasher", "John Carpenter", "Jamie Lee Curtis", "96");
-	Interface_->addMovie("La La Land", "2016", "Comedy,Romance", "Damien Chazelle", "Ryan Gosling,Emma Stone", "80");
-        EXPECT_EQ(Interface_->genreExists("Comedy"), true);
-	EXPECT_EQ(Interface_->genreExists("Horror"), true);
+        Interface_->addMovie("La La Land", "2016", "Comedy,Romance", "Damien Chazelle", "Ryan Gosling,Emma Stone", "80");
+            EXPECT_EQ(Interface_->genreExists("Comedy"), true);
+        EXPECT_EQ(Interface_->genreExists("Horror"), true);
 }
+
+TEST(RecommenderTest, subGenreExists) {
+    auto* sheet = new Spreadsheet();
+    auto* Interface_ = new Interface(sheet);
+    sheet->set_column_names({"Title", "Year", "Genre", "Director", "Actors", "Metascore"});
+    Interface_->addMovie("Halloween", "1978", "Horror,Slasher", "John Carpenter", "Jamie Lee Curtis", "96");
+    Interface_->addMovie("La La Land", "2016", "Comedy,Romance", "Damien Chazelle", "Ryan Gosling,Emma Stone", "80");
+    EXPECT_EQ(Interface_->genreExists("Horror,Slasher"), true);
+}
+TEST(RecommenderTest, subGenreDoesntExists) {
+    auto* sheet = new Spreadsheet();
+    auto* Interface_ = new Interface(sheet);
+    sheet->set_column_names({"Title", "Year", "Genre", "Director", "Actors", "Metascore"});
+    Interface_->addMovie("Halloween", "1978", "Horror,Slasher", "John Carpenter", "Jamie Lee Curtis", "96");
+    Interface_->addMovie("La La Land", "2016", "Comedy,Romance", "Damien Chazelle", "Ryan Gosling,Emma Stone", "80");
+    EXPECT_EQ(Interface_->genreExists("Horror,Romance"), false);
+}
+
 
 int main(int argc, char **argv) {
   ::testing::InitGoogleTest(&argc, argv);

@@ -369,7 +369,7 @@ public:
     }
     //TODO: This function removes a movie
     //TODO: In order to remove a movie
-    void removeMovie(std::string Title){
+    bool removeMovie(std::string Title){
         bool exists = false;
         for(Movie* m: genres) {
             if(m->remove(Title)) exists = true;
@@ -382,6 +382,7 @@ public:
         else{
             std::cout << "\nThat movie does not exist!\n";
         }
+        return exists;
     }
     void removeSubGenre(Movie*m, std::string genre){
         if(m->subGenre(genre) != nullptr) {
