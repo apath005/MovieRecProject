@@ -4,8 +4,6 @@ ADD_SUBDIRECTORY(googletest)
 
 set(CMAKE_CXX_STANDARD 11)
 
-ADD_SUBDIRECTORY(googletest)
-
 ADD_EXECUTABLE(recommender
         main.cpp
         spreadsheet.cpp

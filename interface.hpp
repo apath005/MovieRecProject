@@ -316,7 +316,6 @@ public:
         for(Movie* m : genres) {
             std::cout << m->getMovie();
         }
->>>>>>> master
     }
     void printAllMovies(std::string Genre){
         std::string delimiter = ",";
