@@ -2,8 +2,8 @@
  * Strategy Interface
  */
 
-#ifndef MOVIERECOMMENDER_HPP
-#define MOVIERECOMMENDER_HPP
+#ifndef MOVIESELECTOR_HPP
+#define MOVIESELECTOR_HPP
 
 #include "Movie.hpp"
 #include "spreadsheet.hpp"
@@ -21,4 +21,4 @@ public:
     virtual bool select(const std::string& s) const = 0;
 };
 
-#endif //MOVIERECOMMENDER_H
+#endif //MOVIESELECTOR_H
