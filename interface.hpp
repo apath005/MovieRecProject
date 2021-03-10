@@ -467,7 +467,6 @@ public:
 
     Movie* getGenre(const std::string genre) {
         if(!genreExists(genre)){
-            std::cout << "\nThat genre doesn't exist. Creating it now.\n";
             createGenre(genre);
             return getGenre(genre);
         }
