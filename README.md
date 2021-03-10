@@ -22,7 +22,7 @@ on each data set. The strategy pattern will be helpful in building a tree that s
 
 > * NOTE: WE HAVE CHANGED OUR ORIGINAL PROPOSAL PATTERNS FROM STRATEGY AND VISITOR TO STRATEGY, COMPOSITE, AND FACTORY.
 
- > * The diagram above shows our class structure and how we plan on integrating the Compisite pattern and the Strategy pattern. We can see above that we will have the Movie Recommender Interface hold our final movie recommendation. This is a design choice so we have a family of classes that allow use different algorithms that will allow us to aggregate data that meets our required patterns.  The Strategy pattern will have an algorithm that will allow it to choose the best possible movie based on the parameters and will implement a final conclusive movie recommendation. We can see from the diagram above that we will have a select function that will allow for a recusively called visit to each of the selected classes and aggregate a movie recommendation from visiting inside those classes. The composite pattern will allow us to store movies for genres in a tree data data structure. These two will allow users to choose enter a movie and from create a perfect movie match/es. 
+ > * The diagram above shows our class structure and how we plan on integrating the Compisite pattern and the Strategy pattern. We can see above that we will have the Movie Recommender Interface hold our final movie recommendation. This is a design choice so we have a family of classes that allow use different algorithms that will allow us to aggregate data that meets our required patterns.  The Strategy pattern will have an algorithm that will allow it to choose the best possible movie based on the parameters and will implement a final conclusive movie recommendation. We can see from the diagram above that we will have a select function that will allow for a recusively called visit to each of the selected classes and aggregate a movie recommendation from visiting inside those classes. The composite pattern will allow us to store movies for genres in a tree data data structure. These two will allow users to choose enter a movie and from create a perfect movie match/es. The factory pattern will allow us to house an interface that will combine these patterns and generate an easy- to- use user interface along with a database.
  
  > ## Final deliverable
  > All group members will give a demo to the TA during lab time. The TA will check the demo and the project GitHub repository and ask a few questions to all the team members. 
@@ -31,9 +31,50 @@ on each data set. The strategy pattern will be helpful in building a tree that s
  > * Plan one more sprint (that you will not necessarily complete before the end of the quarter). Your In-progress and In-testing columns should be empty (you are not doing more work currently) but your TODO column should have a full sprint plan in it as you have done before. This should include any known bugs (there should be some) or new features you would like to add. These should appear as issues/cards on your Kanban board. 
  
  ## Screenshots
- > Screenshots of the input/output after running your application
+ ![MainMenu](https://user-images.githubusercontent.com/77028776/110582423-0bfd8500-8121-11eb-9c9b-65e06feab2e8.png)
+ Main Menu with user options
+ 
+ ![CreateCategories](https://user-images.githubusercontent.com/77028776/110582288-dc4e7d00-8120-11eb-963e-90e51149faad.png)
+ Output of Option for Creating Movie Categories (Genres)
+ 
+ ![ViewCategories](https://user-images.githubusercontent.com/77028776/110582533-34857f00-8121-11eb-916d-e6ed2e96a5e5.png)
+ Output of Option for Viewing Categories (Genres) and subGenres
+ 
+ ![VIEWMovies](https://user-images.githubusercontent.com/77028776/110582744-7f06fb80-8121-11eb-8095-bf1ff5f6c2ff.png)
+ Output for Option of Viewing All Movies (sample output)
+ 
+ ![CreatingMovie](https://user-images.githubusercontent.com/77028776/110583161-1d935c80-8122-11eb-944a-1f025216e4ef.png)
+ Output for Option of Creating a Movie
+ 
+ ![DeleteGenre](https://user-images.githubusercontent.com/77028776/110583223-3734a400-8122-11eb-8aa8-41ebf5a57339.png)
+ Output for Option of Removing a Genre/ subGenres
+ 
+ ![DeleteMovie](https://user-images.githubusercontent.com/77028776/110583340-664b1580-8122-11eb-8313-a7c18ab4c691.png)
+ Output for Option of Removing a Movie
+ 
+ ![RECbyGenre](https://user-images.githubusercontent.com/77028776/110583403-7f53c680-8122-11eb-8669-2af58f915640.png)
+ Output for Option of Recommendation by Genre
+ 
+ ![RECbyDirector](https://user-images.githubusercontent.com/77028776/110583473-97c3e100-8122-11eb-9412-8b07a3124b37.png)
+ Output for Option of Recommendation by Director
+
  ## Installation/Usage
- > Instructions on installing and running your application
+ 1. run cmake3 .
+ 2. run make
+ 3. run the executable "./recommender"
+ 4. Follow prompts on the Main Menu screen:
+ > Choose from either:
+ > * 1: Create a Category/SubCategory
+ > * 2: View all Categories/SubCategories 
+ > * 3: View Movies
+ > * 4: Add a Movie
+ > * 5: Remove a Category/SubCategory
+ > * 6: Remove a Movie
+ > * 7: Getting a movie recommendation!
+ > * -1: quit
+ 5. View the database of films, and go ahead and find yourself a perfect movie recommendation by Actor, Director, Year, or Genre!
+ 6. Exit Program.
+
  ## Testing
  > How was your project tested/validated? If you used CI, you should have a "build passing" badge in this README.
  
